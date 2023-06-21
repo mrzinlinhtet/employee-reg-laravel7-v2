@@ -9,13 +9,13 @@ Employee Registration System
 
 @section('content')
 <div class="container">
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="mt-3">Employee List</h3>
+                            <h3 class="">Employee List</h3>
                         </div>
                     </div>
 
@@ -23,13 +23,13 @@ Employee Registration System
                     <form action="{{ route('search-and-download')}}" method="GET">
                         <div class="row mt-3">
                             <div class="col-md-2">
-                                <span class="" id="">Employee ID</span>
+                                <span class="text-muted" id="">Employee ID</span>
                             </div>
                             <div class="col-md-4">
                                 <input type="text" class="form-control">
                             </div>
                             <div class="col-md-2">
-                                <span class="" id="">Employee Code</span>
+                                <span class="text-muted" id="">Employee Code</span>
                             </div>
                             <div class="col-md-4">
                                 <input type="text" class="form-control">
@@ -37,13 +37,13 @@ Employee Registration System
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-2">
-                                <span class="" id="">Employee Name</span>
+                                <span class="text-muted" id="">Employee Name</span>
                             </div>
                             <div class="col-md-4">
                                 <input type="text" class="form-control">
                             </div>
                             <div class="col-md-2">
-                                <span class="" id="">Email</span>
+                                <span class="text-muted" id="">Email</span>
                             </div>
                             <div class="col-md-4">
                                 <input type="text" class="form-control">
@@ -62,7 +62,7 @@ Employee Registration System
 
                     <div class="row">
                         <div class="col-md-12">
-                            <table class="table table-striped mt-3 text-center">
+                            <table class="table table-striped mt-3 table-bordered text-center">
                                 <thead class="bg-black text-white">
                                     <tr>
                                         <th rowspan="2">No</th>
@@ -91,16 +91,16 @@ Employee Registration System
                                             <td>{{ $employee->employee_name }}</td>
                                             <td>{{ $employee->email_address }}</td>
                                             <td>
-                                                <a href="{{ route('employees.edit',$employee->id) }}"><i class="fa-solid text-success fa-pen-to-square fa-xl"></i></a>
+                                                <a href="{{ route('employees.edit',$employee->id) }}"><i class="fa-solid text-success fa-pen-to-square"></i></a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('employees.show',$employee->id) }}"><i class="fa-solid text-info fa-circle-info fa-xl"></i></a>
+                                                <a href="{{ route('employees.show',$employee->id) }}"><i class="fa-solid text-info fa-circle-info"></i></a>
                                             </td>
                                             <td>
                                                 <a href="{{ route('employees.show',$employee->id)}}" class="btn btn-outline-secondary btn-sm" >Active</a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('employees.destroy',$employee->id) }}"><i class="fa-solid text-danger fa-trash fa-xl"></i></a>
+                                                <a href="{{ route('employees.destroy',$employee->id) }}"><i class="fa-solid text-danger fa-trash"></i></a>
                                             </td>
 
                                         </tr>

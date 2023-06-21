@@ -24,8 +24,9 @@
                                         <input type="text" name="employee_id" id="" class="form-control" placeholder="Employee ID">
                                     </div>
 
-                                    <div class="form-group mb-3">
-                                        <input type="password" name="password" id="" class="form-control" placeholder="Password">
+                                    <div class="input-group mb-3">
+                                        <input type="password" name="password" id="passwordInput" class="form-control" placeholder="Password">
+                                        <span id="togglePassword" class="toggle-password input-group-text">👁️</span>
                                     </div>
 
                                     <div class="form-group mb-0 text-center">
@@ -40,4 +41,22 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+    const passwordInput = document.getElementById("passwordInput");
+    const togglePassword = document.getElementById("togglePassword");
+
+    togglePassword.addEventListener("click", function () {
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        togglePassword.innerHTML = "👁️";
+    } else {
+        passwordInput.type = "password";
+        togglePassword.innerHTML = "👁️";
+    }
+    });
+
+  </script>
 @endsection

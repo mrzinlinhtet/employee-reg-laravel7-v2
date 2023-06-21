@@ -36,7 +36,7 @@ class EmployeeAuthRequest extends FormRequest
     public function rules()
     {
         return [
-            "employee_id"=>"required|integer|exists:employees,employee_id|max:999999",
+            "employee_id"=>"required|integer|exists:employees,employee_id",
             "password"=>"required"
         ];
     }

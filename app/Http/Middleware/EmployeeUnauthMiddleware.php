@@ -4,14 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-/**
- * Class EmployeeSessionMiddleware
- * Handles employee login authentication
- *
- * @author Zin Lin Htet
- * @created 21/6/2023
- */
-class EmployeeSessionMiddleware
+class EmployeeUnauthMiddleware
 {
     /**
      * Handle an incoming request.
@@ -20,18 +13,12 @@ class EmployeeSessionMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-
-    /**
-     *
-     * @author Zin Lin Htet
-     * @created 21/6/2023
-     */
     public function handle($request, Closure $next)
     {
         if (session()->has('employee')) {
-            return $next($request);
+            return redirect()->route('employees.index');
         }
 
-        return redirect()->route('login');
+        return $next($request);
     }
 }
