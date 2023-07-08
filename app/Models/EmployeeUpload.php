@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  * @author Zin Lin Htet
  * @created 21/6/2023
  */
-class EmployeeUploads extends Model
+class EmployeeUpload extends Model
 {
-
 }

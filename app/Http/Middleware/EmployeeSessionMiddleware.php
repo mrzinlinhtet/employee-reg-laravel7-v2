@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 
 /**
- * Class EmployeeSessionMiddleware
+ * EmployeeSessionMiddleware
  * Handles employee login authentication
  *
  * @author Zin Lin Htet
@@ -22,7 +22,6 @@ class EmployeeSessionMiddleware
      */
 
     /**
-     *
      * @author Zin Lin Htet
      * @created 21/6/2023
      */

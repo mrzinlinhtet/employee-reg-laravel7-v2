@@ -27,11 +27,11 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_name',50);
             $table->string('nrc_number',50);
             $table->string('password',255);
-            $table->string('email_address',255);
+            $table->string('email_address',255)->unique();
             $table->integer('gender')->nullable();
             $table->date('date_of_birth');
             $table->integer('marital_status')->nullable();
-            $table->string('address',255);
+            $table->longText('address')->nullable();
             $table->softDeletes('deleted_at');
             $table->timestamps();
         });

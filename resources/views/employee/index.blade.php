@@ -1,138 +1,342 @@
 @extends('layouts.app')
 
 @section('title')
-Employee Registration System
-@endsection
-
-@section('nav')
+    @lang('messages.employee_registration_system')
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="card mb-3">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3 class="">Employee List</h3>
-                        </div>
-                    </div>
-
-
-                    <form action="{{ route('search-and-download')}}" method="GET">
-                        <div class="row mt-3">
-                            <div class="col-md-2">
-                                <span class="text-muted" id="">Employee ID</span>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-md-2">
-                                <span class="text-muted" id="">Employee Code</span>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-2">
-                                <span class="text-muted" id="">Employee Name</span>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-md-2">
-                                <span class="text-muted" id="">Email</span>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-md-12 d-flex justify-content-evenly align-items-center">
-                                <button type="submit" class="btn btn-primary btn-sm">Search</button>
-                                <button type="submit" name="download" class="btn btn-primary btn-sm" value="true">PDF Download</button>
-                                <button type="submit" name="download" class="btn btn-primary btn-sm" value="true">Excel Download</button>
-                                {{-- <span class="float-end">Total Count : <span class="fw-bold">{{ $counts }}</span></span> --}}
-
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="table table-striped mt-3 table-bordered text-center">
-                                <thead class="bg-black text-white">
-                                    <tr>
-                                        <th rowspan="2">No</th>
-                                        <th rowspan="2">Employee ID</th>
-                                        <th rowspan="2">Employee Code</th>
-                                        <th rowspan="2">Employee Name</th>
-                                        <th rowspan="2">Email</th>
-                                        <th colspan="4">Action</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Edit</th>
-                                        <th>Detail</th>
-                                        <th>Active</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($employees as $employee)
-                                    <form action="{{ route('employees.destroy',$employee->id) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <tr>
-                                            <td>{{ $employee->id }}</td>
-                                            <td>{{ $employee->employee_id }}</td>
-                                            <td>{{ $employee->employee_code }}</td>
-                                            <td>{{ $employee->employee_name }}</td>
-                                            <td>{{ $employee->email_address }}</td>
-                                            <td>
-                                                <a href="{{ route('employees.edit',$employee->id) }}"><i class="fa-solid text-success fa-pen-to-square"></i></a>
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('employees.show',$employee->id) }}"><i class="fa-solid text-info fa-circle-info"></i></a>
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('employees.show',$employee->id)}}" class="btn btn-outline-secondary btn-sm" >Active</a>
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('employees.destroy',$employee->id) }}"><i class="fa-solid text-danger fa-trash"></i></a>
-                                            </td>
-
-                                        </tr>
-                                    </form>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-3">
+                    @if (session()->has('error'))
+                        @if (is_array(session('error')))
+                            <div class="alert alert-danger" role="alert">
+                                <button type="button" class="btn-close float-end" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                                @foreach (session()->get('error') as $error)
+                                    <div><i class="fa-solid fa-triangle-exclamation"></i> {{ $error['error'] }}</div>
                                 @endforeach
-
-
-
-                                </tbody>
-                            </table>
-
+                            </div>
+                        @else
+                            <div class="alert alert-danger" role="alert">
+                                <button type="button" class="btn-close float-end" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                                <span><i class="fa-solid fa-triangle-exclamation"></i> {{ session()->get('error') }}</span>
+                            </div>
+                        @endif
+                    @elseif(session()->has('success'))
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="btn-close float-end" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                            <span><i class="fa-solid fa-circle-check"></i> {{ session()->get('success') }}</span>
                         </div>
+                    @endif
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            <span><i class="fa-solid fa-circle-check"></i> {{ session('status') }}</span>
+                        </div>
+                    @endif
+                    <div class="">
+                        <div class="row">
+                            <div class="col-12">
+                                <h3 class="mt-3 ms-3">@lang('messages.employee_list')</h3>
 
-                    </div>
+                                <form action="{{ route('employees.index') }}" method="GET">
+                                    <div class="row mt-4">
+                                        <div class="col-md-2">
+                                            <div class="text-muted float-end" id="">@lang('messages.employee_id')</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" name="search_employee_id"
+                                                value="{{ $search_employee_id }}">
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-2">
+                                            <div class="text-muted float-end" id="">@lang('messages.employee_code')</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" name="search_employee_code"
+                                                value="{{ $search_employee_code }}">
+                                        </div>
+                                        <div class="col-md-1"></div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="float-end">
-                                {{ $employees->links() }}
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-2">
+                                            <div class="text-muted float-end" id="">@lang('messages.employee_name')</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" name="search_employee_name"
+                                                value="{{ $search_employee_name }}">
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-2">
+                                            <div class="text-muted float-end" id="">@lang('messages.employee_email')</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" name="search_email_address"
+                                                value="{{ $search_email_address }}">
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-md-12 d-flex justify-content-center">
+                                            <button type="submit"
+                                                class=" btn-info btn-sm mx-3 search-btn">@lang('messages.search')</button>
+                                            {{-- @if (isset($search_employee_id) || isset($search_employee_code) || isset($search_employee_name) || $search_email_address)
+                                                <a href="{{ route('employees.index') }}" type="submit"
+                                                    class="btn btn-dark active-btn reset-btn btn-sm mx-3">@lang('messages.reset')</a>
+                                            @endif --}}
+                                            @if ($employees->isEmpty())
+                                                <button
+                                                    style="right: 180px;
+                                                position: absolute;margin-top: 16px;"
+                                                    name="" class="btn btn-outline-dark mx-1 btn-sm" value="true"
+                                                    disabled>@lang('messages.pdf_download')</button>
+                                            @else
+                                                <a style="right: 180px;
+                                                position: absolute;margin-top: 16px;"
+                                                    href="{{ route('search-download-pdf', request()->query()) }}"
+                                                    name="" class="btn btn-outline-dark mx-1 btn-sm"
+                                                    value="true">@lang('messages.pdf_download')</a>
+                                            @endif
+                                            @if ($employees->isEmpty())
+                                                <button
+                                                    style="right: 15px;
+                                                position: absolute;margin-top: 16px;"
+                                                    name="downloadExcel" class="btn btn-outline-dark btn-sm" value="true"
+                                                    disabled>@lang('messages.excel_download')</button>
+                                            @else
+                                                <a style="right: 15px;
+                                                position: absolute;margin-top: 16px;"
+                                                    href="{{ route('search-download-excel', request()->query()) }}"
+                                                    name="downloadExcel" class="btn btn-outline-dark btn-sm"
+                                                    value="true">@lang('messages.excel_download')</a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-7"></div>
+                                    <div class="col-md-5">
+                                        <span class="me-3 float-end">@lang('messages.total_rows')<span
+                                                class="fw-bold">{{ $counts }}
+                                                row(s)</span></span>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered text-center">
+                                                <thead class="align-middle">
+                                                    <tr>
+                                                        <th class="th-bg" rowspan="2">@lang('messages.no')</th>
+                                                        <th class="th-bg" rowspan="2">@lang('messages.employee_id')</th>
+                                                        <th class="th-bg" rowspan="2">@lang('messages.employee_code')</th>
+                                                        <th class="th-bg" rowspan="2">@lang('messages.employee_name')</th>
+                                                        <th class="th-bg" rowspan="2">@lang('messages.employee_email')</th>
+                                                        <th class="th-bg" colspan="4">@lang('messages.action')</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="th-bg">@lang('messages.edit')</th>
+                                                        <th class="th-bg">@lang('messages.detail')</th>
+                                                        <th class="th-bg">@lang('messages.status')</th>
+                                                        <th class="th-bg">@lang('messages.delete')</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="align-middle">
+                                                    @foreach ($employees as $employee)
+                                                        <tr>
+                                                            <td>{{ ($employees->currentPage() - 1) * $employees->perPage() + $loop->iteration }}
+                                                            </td>
+                                                            <td>{{ $employee->employee_id }}</td>
+                                                            <td>{{ $employee->employee_code }}</td>
+                                                            <td>{{ $employee->employee_name }}</td>
+                                                            <td>{{ $employee->email_address }}</td>
+                                                            <td>
+                                                                @if ($employee->deleted_at != null)
+                                                                    <i
+                                                                        class="fa-solid text-success text-muted fa-pen-to-square fa-xl"></i>
+                                                                @else
+                                                                    <a
+                                                                        href="{{ route('employees.edit', $employee->id) }}"><i
+                                                                            class="fa-solid text-success fa-pen-to-square fa-xl"></i></a>
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                <a href="{{ route('employees.show', $employee->id) }}"><i
+                                                                        class="fa-solid text-info fa-circle-info fa-xl"></i></a>
+                                                            </td>
+                                                            <td>
+                                                                @if ($employee->deleted_at != null)
+                                                                    <form id="confirmActive{{ $employee->id }}"
+                                                                        action="{{ route('emp-active', $employee->id) }}"
+                                                                        method="POST" style="display: inline;">
+                                                                        @csrf
+                                                                        @method('PATCH')
+                                                                        <button type="button"
+                                                                            class="btn btn-dark btn-sm active-btn"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#active{{ $employee->id }}">Active</button>
+                                                                    </form>
+                                                                @endif
+
+                                                                @if ($employee->deleted_at == null)
+                                                                    <form id="confirmInactive{{ $employee->id }}"
+                                                                        action="{{ route('emp-inactive', $employee->id) }}"
+                                                                        method="POST" style="display: inline;">
+                                                                        @csrf
+                                                                        @method('PATCH')
+                                                                        <button type="button"
+                                                                            class="btn btn-dark btn-sm inactive-btn"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#inactive{{ $employee->id }}">Inactive</button>
+                                                                    </form>
+                                                                @endif
+                                                            </td>
+
+                                                            <td>
+                                                                @if ($employee->deleted_at != null)
+                                                                    <i
+                                                                        class="fa-solid text-danger text-muted fa-trash fa-xl"></i>
+                                                                @else
+                                                                    <form id="confirmDelete{{ $employee->id }}"
+                                                                        action="{{ route('employees.destroy', $employee->id) }}"
+                                                                        method="post">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="button" class="btn"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#delete{{ $employee->id }}"><i
+                                                                                class="fa-solid text-danger fa-trash fa-xl"></i></button>
+                                                                    </form>
+                                                                @endif
+                                                            </td>
+
+
+
+                                                        </tr>
+                                                        <div class="modal fade" id="delete{{ $employee->id }}"
+                                                            tabindex="-1" role="dialog" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">@lang('messages.confirmation')</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>@lang('messages.delete_text')
+                                                                        </p>
+                                                                        <div>@lang('messages.employee_id') :
+                                                                            {{ $employee->employee_id }} </div>
+                                                                        <div>@lang('messages.employee_name') :
+                                                                            {{ $employee->employee_name }}</div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">@lang('messages.cancel')</button>
+
+                                                                        <button form="confirmDelete{{ $employee->id }}"
+                                                                            type="submit"
+                                                                            class="btn btn-info">@lang('messages.ok')</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal fade" id="active{{ $employee->id }}"
+                                                            tabindex="-1" role="dialog" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">@lang('messages.confirmation')</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>@lang('messages.active_text')
+                                                                        </p>
+                                                                        <div>@lang('messages.employee_id') :
+                                                                            {{ $employee->employee_id }} </div>
+                                                                        <div>@lang('messages.employee_name') :
+                                                                            {{ $employee->employee_name }}</div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">@lang('messages.cancel')</button>
+
+                                                                        <button form="confirmActive{{ $employee->id }}"
+                                                                            type="submit"
+                                                                            class="btn btn-info">@lang('messages.ok')</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal fade" id="inactive{{ $employee->id }}"
+                                                            tabindex="-1" role="dialog" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">@lang('messages.confirmation')</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>@lang('messages.inactive_text')
+                                                                        </p>
+                                                                        <div>@lang('messages.employee_id') :
+                                                                            {{ $employee->employee_id }} </div>
+                                                                        <div>@lang('messages.employee_name') :
+                                                                            {{ $employee->employee_name }}</div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">@lang('messages.cancel')</button>
+
+                                                                        <button form="confirmInactive{{ $employee->id }}"
+                                                                            type="submit"
+                                                                            class="btn btn-info">@lang('messages.ok')</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                    @if ($employees->isEmpty())
+                                                        <tr>
+                                                            <td colspan="9">
+                                                                @lang('messages.search_no_data')
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-center">
+                                            {{ $employees->links() }}
+                                        </div>
+                                    </div>
+                                </div>
+
+
 
                             </div>
-                            {{-- ->appends(['keyword' => $search]) --}}
+
                         </div>
                     </div>
-
-
-
                 </div>
-
             </div>
         </div>
     </div>
-</div>
 @endsection

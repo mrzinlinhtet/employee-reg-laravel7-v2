@@ -27,6 +27,7 @@ class CreateEmployeeUploadsTable extends Migration
                     ->on('employees')
                     ->onDelete('cascade');
             $table->string('file_path',500);
+            $table->string('file_name',500);
             $table->integer('file_size');
             $table->string('file_extension',50);
             $table->timestamps();

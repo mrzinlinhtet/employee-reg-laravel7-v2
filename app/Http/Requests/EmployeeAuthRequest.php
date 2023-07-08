@@ -4,13 +4,13 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * EmployeeAuthRequest to login validation.
+ * @author Zin Lin Htet
+ * @created 21/6/2023
+ */
 class EmployeeAuthRequest extends FormRequest
 {
-    /**
-     * Create EmployeeAuthRequest for validation.
-     * @author Zin Lin Htet
-     * @created 21/6/2023
-     */
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,7 +28,7 @@ class EmployeeAuthRequest extends FormRequest
      */
 
     /**
-     * Rules for employee validation
+     * Rules for employee login validation
      * @author Zin Lin Htet
      * @created 21/6/2023
      * @return array
@@ -36,13 +36,13 @@ class EmployeeAuthRequest extends FormRequest
     public function rules()
     {
         return [
-            "employee_id"=>"required|integer|exists:employees,employee_id",
-            "password"=>"required"
+            "employee_id" => "required|integer|exists:employees,employee_id",
+            "password" => "required"
         ];
     }
 
     /**
-     * Messages for employee validation
+     * Messages for employee login validation
      * @author Zin Lin Htet
      * @created 21/6/2023
      * @return array

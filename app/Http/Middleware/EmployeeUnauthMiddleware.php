@@ -4,6 +4,13 @@ namespace App\Http\Middleware;
 
 use Closure;
 
+/**
+ * EmployeeUnauthMiddleware
+ * Handles employee login authentication
+ *
+ * @author Zin Lin Htet
+ * @created 21/6/2023
+ */
 class EmployeeUnauthMiddleware
 {
     /**
@@ -12,6 +19,10 @@ class EmployeeUnauthMiddleware
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
+     */
+    /**
+     * @author Zin Lin Htet
+     * @created 21/6/2023
      */
     public function handle($request, Closure $next)
     {

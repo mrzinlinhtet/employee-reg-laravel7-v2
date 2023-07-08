@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Employee;
+use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Models\EmployeeUpload;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\EmployeeAuthRequest;
 
 /**
- * Create EmployeeAuthController for login and logout.
+ * EmployeeAuthController for login and logout.
  * @author Zin Lin Htet
  * @created 21/6/2023
  */
@@ -23,18 +24,23 @@ class EmployeeAuthController extends Controller
      */
     public function login(EmployeeAuthRequest $request)
     {
-        $employee = Employee::where('employee_id',$request->employee_id)->first();
-        if($employee){
-            if(Hash::check($request->password,$employee->password)){
-                session()->put('employee',$employee);
+        $employee = Employee::where('employee_id', $request->employee_id)->first();
+        if ($employee) {
+            if (Hash::check($request->password, $employee->password)) {
+                session()->put('employee', $employee);
+                $photo = EmployeeUpload::where('employee_id', $employee->employee_id)->first();
+                if ($photo) {
+                    session()->put('photo', 'uploads/' . $photo->file_name);
+                } else {
+                    session()->put('photo', 'images/user.png');
+                }
                 return redirect()->route('employees.index');
-            }else{
+            } else {
                 return redirect()->back()->withErrors(['error' => 'Employee ID and password are not match.']);
             }
-        }else{
+        } else {
             return redirect()->back()->withErrors(['error' => 'Invalid employee ID or password.']);
         }
-
     }
 
     /**
@@ -64,5 +70,4 @@ class EmployeeAuthController extends Controller
         // Redirect to the login page
         return redirect()->route('login.show');
     }
-
 }

@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Employee;
+use App\Models\Employee;
 use App\Interfaces\EmployeeInterface;
 
 /**
@@ -14,14 +14,38 @@ use App\Interfaces\EmployeeInterface;
 class EmployeeRepository implements EmployeeInterface
 {
     /**
-     * Get all data from employees table
+     * Get all data from employees table with the condition
      * @author Zin Lin Htet
      * @created 21/6/2023
      * @return object
      */
-    public function getAllEmployees()
+    public function getAllEmployees($searchEmployeeID = null, $searchEmployeeCode = null, $searchEmployeeName = null, $searchEmailAddress = null)
     {
-        return Employee::all();
+        $query = Employee::query()->withTrashed();
+
+        $query->when(!empty($searchEmployeeID), function ($query) use ($searchEmployeeID) {
+            return $query->where('employee_id', 'LIKE', '%' . $searchEmployeeID . '%');
+        });
+
+        $query->when(!empty($searchEmployeeCode), function ($query) use ($searchEmployeeCode) {
+            return $query->where('employee_code', 'LIKE', '%' . $searchEmployeeCode . '%');
+        });
+
+        $query->when(!empty($searchEmployeeName), function ($query) use ($searchEmployeeName) {
+            return $query->where('employee_name', 'LIKE', '%' . $searchEmployeeName . '%');
+        });
+
+        $query->when(!empty($searchEmailAddress), function ($query) use ($searchEmailAddress) {
+            return $query->where('email_address', 'LIKE', '%' . $searchEmailAddress . '%');
+        });
+
+
+        return $query->orderBy('id', 'desc')->paginate(20)->appends([
+            'search_employee_id' => $searchEmployeeID,
+            'search_employee_code' => $searchEmployeeCode,
+            'search_employee_name' => $searchEmployeeName,
+            'search_email_address' => $searchEmailAddress
+        ]);
     }
 
     /**
@@ -33,21 +57,32 @@ class EmployeeRepository implements EmployeeInterface
      */
     public function getEmployeeById($id)
     {
-        return Employee::find($id);
+        return Employee::withTrashed()->find($id);
     }
 
     /**
-     * Use for pagination 20
+     * Use for row count of all employees
      * @author Zin Lin Htet
      * @created 21/6/2023
      * @return object
      */
-    public function pagination()
+    public function count()
     {
-        return Employee::paginate(20);
+        return Employee::withTrashed()->count();
+    }
+
+    /**
+     * Use for previous page
+     * @author Zin Lin Htet
+     * @created 21/6/2023
+     * @return object
+     */
+    public function previousPage($id)
+    {
+        $previousPage = Employee::withTrashed()->where('id', '>', $id)->count();
+        //21 > 39%20 = 1.9
+        //21 >= 40%20 = 2
+        $result = intval(floor(($previousPage / 20)  + 1));
+        return $result;
     }
 }
-
-
-
-?>
