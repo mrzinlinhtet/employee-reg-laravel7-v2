@@ -45,7 +45,7 @@
                                 <form action="{{ route('employees.index') }}" method="GET">
                                     <div class="row mt-4">
                                         <div class="col-md-2">
-                                            <div class="text-muted float-end" id="">@lang('messages.employee_id')</div>
+                                            <div class="text-muted float-end me-2" >@lang('messages.employee_id')</div>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" name="search_employee_id"
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-md-1"></div>
                                         <div class="col-md-2">
-                                            <div class="text-muted float-end" id="">@lang('messages.employee_code')</div>
+                                            <div class="text-muted float-end me-2" >@lang('messages.employee_code')</div>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" name="search_employee_code"
@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-2">
-                                            <div class="text-muted float-end" id="">@lang('messages.employee_name')</div>
+                                            <div class="text-muted float-end me-2" >@lang('messages.employee_name')</div>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" name="search_employee_name"
@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="col-md-1"></div>
                                         <div class="col-md-2">
-                                            <div class="text-muted float-end" id="">@lang('messages.employee_email')</div>
+                                            <div class="text-muted float-end me-2" >@lang('messages.employee_email')</div>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" name="search_email_address"
@@ -89,29 +89,19 @@
                                                     class="btn btn-dark active-btn reset-btn btn-sm mx-3">@lang('messages.reset')</a>
                                             @endif --}}
                                             @if ($employees->isEmpty())
-                                                <button
-                                                    style="right: 180px;
-                                                position: absolute;margin-top: 16px;"
-                                                    name="" class="btn btn-outline-dark mx-1 btn-sm" value="true"
-                                                    disabled>@lang('messages.pdf_download')</button>
+                                                <button name="" class="btn btn-outline-dark mx-2 btn-sm pdf-btn"
+                                                    value="true" disabled>@lang('messages.pdf_download')</button>
                                             @else
-                                                <a style="right: 180px;
-                                                position: absolute;margin-top: 16px;"
-                                                    href="{{ route('search-download-pdf', request()->query()) }}"
-                                                    name="" class="btn btn-outline-dark mx-1 btn-sm"
+                                                <a href="{{ route('search-download-pdf', request()->query()) }}"
+                                                    name="" class="btn btn-outline-dark mx-2 btn-sm pdf-btn"
                                                     value="true">@lang('messages.pdf_download')</a>
                                             @endif
                                             @if ($employees->isEmpty())
-                                                <button
-                                                    style="right: 15px;
-                                                position: absolute;margin-top: 16px;"
-                                                    name="downloadExcel" class="btn btn-outline-dark btn-sm" value="true"
-                                                    disabled>@lang('messages.excel_download')</button>
+                                                <button name="downloadExcel" class="btn btn-outline-dark mx-2 btn-sm excel-btn"
+                                                    value="true" disabled>@lang('messages.excel_download')</button>
                                             @else
-                                                <a style="right: 15px;
-                                                position: absolute;margin-top: 16px;"
-                                                    href="{{ route('search-download-excel', request()->query()) }}"
-                                                    name="downloadExcel" class="btn btn-outline-dark btn-sm"
+                                                <a href="{{ route('search-download-excel', request()->query()) }}"
+                                                    name="downloadExcel" class="btn btn-outline-dark mx-2 btn-sm excel-btn"
                                                     value="true">@lang('messages.excel_download')</a>
                                             @endif
                                         </div>
@@ -121,7 +111,7 @@
                                 <div class="row mt-3">
                                     <div class="col-md-7"></div>
                                     <div class="col-md-5">
-                                        <span class="me-3 float-end">@lang('messages.total_rows')<span
+                                        <span class="me-4 float-end">@lang('messages.total_rows')<span
                                                 class="fw-bold">{{ $counts }}
                                                 row(s)</span></span>
                                     </div>
@@ -321,7 +311,7 @@
 
                                 </div>
 
-                                <div class="row">
+                                <div class="row mt-2">
                                     <div class="col-12">
                                         <div class="d-flex justify-content-center">
                                             {{ $employees->links() }}

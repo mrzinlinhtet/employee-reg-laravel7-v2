@@ -15,6 +15,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <style>
+        .pdf-btn {
+            right: 180px;
+            position: absolute;
+            margin-top: 16px;
+        }
+
+        .excel-btn {
+            right: 15px;
+            position: absolute;
+            margin-top: 16px;
+        }
+
         /* width */
         ::-webkit-scrollbar {
             width: 10px;
@@ -287,6 +299,25 @@
         }
 
         @media screen and (max-width:600px) {
+            .pdf-btn {
+                right: 0px;
+                position: static !important;
+                margin-top: 0px;
+            }
+
+            .excel-btn {
+                right: 0px;
+                position: static !important;
+                margin-top: 0px;
+            }
+
+
+
+
+            .navbar-brand {
+                display: none;
+            }
+
             .file-upload {
                 width: 300px;
             }

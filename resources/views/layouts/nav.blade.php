@@ -3,7 +3,7 @@
         <div class="col-12 p-0 m-0">
             <nav class="navbar bg-green fixed-top navbar-expand-lg">
                 <div class="container-fluid">
-                    <a class="navbar-brand p-2 rounded" href="{{ route('employees.index') }}">
+                    <a class="p-2 rounded" href="{{ route('employees.index') }}">
                         <img src="/images/logo-modified.png" alt="Bootstrap" width="45" height="40" class="">
                     </a>
                     <a class="navbar-brand small-text text-white" style="color: white;font-family:monospace;"
