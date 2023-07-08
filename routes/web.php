@@ -26,6 +26,15 @@ Route::group(['middleware' => 'employee.unauth'], function () {
     Route::get('/', 'EmployeeAuthController@show')->name('login.show');
     Route::get('/login', 'EmployeeAuthController@show')->name('login.show');
     Route::post('/login', 'EmployeeAuthController@login')->name('login');
+    //forgotPassword
+    Route::get('/forgot-password-form', 'ForgotPasswordMailController@getForgotForm')->name('forgot-password');
+    Route::post('/forgot-password-form', 'ForgotPasswordMailController@postForgotForm')->name('forgot-password');
+    //changePassword
+    Route::get('/change-password-form', 'ForgotPasswordMailController@getChangePasswordForm')->name('change-password');
+    Route::post('/change-password-form', 'ForgotPasswordMailController@postChangePasswordForm')->name('change-password');
+    //verifyOTP
+    Route::get('/verify-otp-form', 'ForgotPasswordMailController@getVerifyOTPForm')->name('verify-otp');
+    Route::post('/verify-otp-form', 'ForgotPasswordMailController@postVerifyOTPForm')->name('verify-otp');
 });
 
 //Routes or controller methods that require employee session
@@ -45,7 +54,6 @@ Route::group(['middleware' => 'employee.session'], function () {
     Route::patch('employees/active/{id}', 'EmployeeController@restore')->name('emp-active');
     //change language
     Route::get('language/{locale}', 'LocalizationController@setLang');
-
     //logout
     Route::get('logout', 'EmployeeAuthController@logout')->name('logout');
 });

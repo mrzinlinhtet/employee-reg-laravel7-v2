@@ -34,6 +34,10 @@
                                 <span id="togglePassword" class="toggle-password input-group-text">👁️</span>
                             </div>
 
+                            <div class="form-group mb-3">
+                                <a href="{{ route('forgot-password') }}" class="text-white" style="font-size: 15px;">Forgot Password?</a>
+                            </div>
+
                             <div class="form-group mb-0 text-center">
                                 <button type="submit" class="login-btn btn btn-outline-info my-3">Login</button>
                             </div>
