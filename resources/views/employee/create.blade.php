@@ -138,7 +138,8 @@
                                         <div class="input-group">
                                             <input type="password" id="passwordInput" name="password"
                                                 class="form-control" value="{{ old('password') }}">
-                                            <span id="togglePassword" class="toggle-password input-group-text">👁️</span>
+                                            <span id="togglePassword" class="toggle-password input-group-text"><i
+                                                    class="fas fa-eye"></i></span>
                                             <a class="btn btn-outline-dark float-end btn-sm pt-2"
                                                 onclick="generatePassword()">@lang('messages.generate_password')</a>
                                         </div>
@@ -275,7 +276,8 @@
 
                 @if (request()->formSelector == 'form2')
                     <div class="row">
-                        <span id="togglePassword" class="toggle-password input-group-text d-none">👁️</span>
+                        <span id="togglePassword" class="toggle-password input-group-text d-none"><i
+                                class="fas fa-eye"></i></span>
                         <div class="col-12">
                             <form id="form2" action="{{ route('reg-import') }}" method="POST" class="form"
                                 enctype="multipart/form-data">
@@ -440,17 +442,17 @@
         }
     </script>
     <script>
-        //password toggle
-        const passwordInput = document.getElementById("passwordInput");
-        const togglePassword = document.getElementById("togglePassword");
+        // password toggle
+        const passwordInput = $("#passwordInput");
+        const togglePassword = $("#togglePassword");
 
-        togglePassword.addEventListener("click", function() {
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                togglePassword.innerHTML = "👁️";
+        togglePassword.on('click', function() {
+            if (passwordInput.attr('type') === "password") {
+                passwordInput.attr('type', 'text');
+                togglePassword.html('<i class="fas fa-eye-slash"></i>');
             } else {
-                passwordInput.type = "password";
-                togglePassword.innerHTML = "👁️";
+                passwordInput.attr('type', 'password');
+                togglePassword.html('<i class="fas fa-eye"></i>');
             }
         });
     </script>

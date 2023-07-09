@@ -42,7 +42,8 @@
                                     <div class="input-group mb-3">
                                         <input type="password" name="password" id="passwordInput" class="form-control"
                                             placeholder="Password" autocomplete="off">
-                                        <span id="togglePassword" class="toggle-password input-group-text">👁️</span>
+                                        <span id="togglePassword" class="toggle-password input-group-text"><i
+                                                class="fas fa-eye"></i></span>
                                     </div>
 
                                     <div class="form-group mb-3">
@@ -65,17 +66,17 @@
 
 @section('footer')
     <script>
-        //password toggle
-        const passwordInput = document.getElementById("passwordInput");
-        const togglePassword = document.getElementById("togglePassword");
+        // password toggle
+        const passwordInput = $("#passwordInput");
+        const togglePassword = $("#togglePassword");
 
-        togglePassword.addEventListener("click", function() {
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                togglePassword.innerHTML = "👁️";
+        togglePassword.on('click', function() {
+            if (passwordInput.attr('type') === "password") {
+                passwordInput.attr('type', 'text');
+                togglePassword.html('<i class="fas fa-eye-slash"></i>');
             } else {
-                passwordInput.type = "password";
-                togglePassword.innerHTML = "👁️";
+                passwordInput.attr('type', 'password');
+                togglePassword.html('<i class="fas fa-eye"></i>');
             }
         });
     </script>
