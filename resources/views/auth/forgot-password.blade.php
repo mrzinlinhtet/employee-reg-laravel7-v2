@@ -58,20 +58,18 @@
 @endsection
 
 @section('footer')
-    <script>
-        $(document).ready(function() {
-            // Target the continue button
-            $('#continue-btn').click(function() {
-                // Perform some actions before the timeout
-                console.log('Button clicked!');
-
-                // Set a timeout of 2 seconds (2000 milliseconds)
-                setTimeout(function() {
-                    // Actions to perform after the timeout
-                    $('#spinner').removeClass('d-none');
-                    console.log('Timeout completed!');
-                }, 2000);
-            });
+<script>
+    $(document).ready(function() {
+        // Target the continue button
+        $('#continue-btn').click(function() {
+            // remove d-none before the timeout
+            $('#spinner').removeClass('d-none');
+            // Set a timeout of seconds (1000 milliseconds)
+            setTimeout(function() {
+                // add d-none after the timeout
+                $('#spinner').addClass('d-none');
+            }, 7000);
         });
-    </script>
+    });
+</script>
 @endsection
