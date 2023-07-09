@@ -275,6 +275,7 @@
 
                 @if (request()->formSelector == 'form2')
                     <div class="row">
+                        <span id="togglePassword" class="toggle-password input-group-text d-none">👁️</span>
                         <div class="col-12">
                             <form id="form2" action="{{ route('reg-import') }}" method="POST" class="form"
                                 enctype="multipart/form-data">
