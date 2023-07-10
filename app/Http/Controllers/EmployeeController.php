@@ -107,7 +107,6 @@ class EmployeeController extends Controller
                 return redirect()->route('employees.index')->with('error', "Employee created Failed!");
             }
         }
-
         if ($saveEmployee) {
             return redirect()->route('employees.index')->with('success', "Employee created successfully");
         } else {
@@ -187,7 +186,6 @@ class EmployeeController extends Controller
         // Call UpdateEmployee from DBTransactions
         $updateEmployee = new UpdateEmployee($request, $id);
         $updateResult = $updateEmployee->executeProcess();
-
         // Check if a new photo is being uploaded
         if ($request->hasFile('photo')) {
             // Call UpdateEmployeeUpload from DBTransactions
@@ -211,7 +209,6 @@ class EmployeeController extends Controller
                 }
             }
         }
-
         // Handle the result of the updates
         if ($updateResult) {
             return redirect()->route('employees.index', ['page' => $previousPage])->with('success', "Employee updated successfully");
@@ -236,35 +233,43 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $count = $this->employeeInterface->count(); //61
-        // dd($count);
-        $result = $this->employeeInterface->previousPage($id); //4
         $employee = $this->employeeInterface->getEmployeeById($id);
+
         if (!$employee) {
-            return redirect()->back()->with('error', ' Employee deleted Failed!');
+            return redirect()->back()->with('error', 'Employee deletion failed!');
         }
-        //to restrict to delete current login employee
+        // To restrict deleting the currently logged-in employee
         if (session('employee')->id == $id) {
-            return redirect()->back()->with('error', ' Cannot delete the current login Employee!');
+            return redirect()->back()->with('error', 'Cannot delete the currently logged-in employee!');
         }
-        //to restrict to delete inactive employee
+        // To restrict deleting an inactive employee
         if ($employee->deleted_at != null) {
-            return redirect()->back()->with('error', ' Cannot delete the inactive Employee!');
+            return redirect()->back()->with('error', 'Cannot delete an inactive employee!');
         }
-        if ($employee) {
-            $deleteEmployee = new DeleteEmployee($id);
-            $deleteEmp = $deleteEmployee->executeProcess();
+        $deleteEmployee = new DeleteEmployee($id);
+        $deleteEmp = $deleteEmployee->executeProcess();
+        //Get the url for current page number
+        $url = url()->previous();
+        //Breaks down the URL into its components
+        $parsedUrl = parse_url($url);
+        //Extracts the query parameters into an associative array
+        parse_str($parsedUrl['query'], $queryParameters);
+        $currentPage = $queryParameters['page'];
+
+        if ($deleteEmp) {
+            $perPage = 20; // Replace with your actual pagination per page count
+            // Calculate the total number of pages
+            $totalPages = ceil($this->employeeInterface->count() / $perPage);
+            // Calculate the previous page number
+            $previousPage = max(1, $currentPage - 1);
             // Redirect to the previous page if the last row on the current page is deleted
-            if ($result > 0 && $result >= round($count / 20)) {
-                $previousPage = $result - 1;
+            if ($currentPage > $totalPages && $previousPage > 0) {
                 return redirect()->route('employees.index', ['page' => $previousPage])->with('success', 'Employee has been deleted!');
-            } elseif ($deleteEmp) {
-                return redirect()->back()->with('success', 'Employee has been deleted!');
             } else {
-                return redirect()->back()->with('error', ' Employee deleted Failed!');
+                return redirect()->back()->with('success', 'Employee has been deleted!');
             }
         }
-        return redirect()->back()->with('error', ' Employee does not exist!');
+        return redirect()->back()->with('error', 'Employee deletion failed!');
     }
 
     /**
