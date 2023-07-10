@@ -16,7 +16,7 @@ class CreateEmployeesTable extends Migration
      * Create employee table for databese.
      *
      * @author Zin Lin Htet
-     * @created 21/6/2023
+     * @created 21/06/2023
      */
     public function up()
     {

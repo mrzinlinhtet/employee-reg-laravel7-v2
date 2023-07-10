@@ -4,9 +4,9 @@
 @section('content')
     <div class="container-fluid login-bg">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+            <div class="col-md-5"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
                 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
                     <form method="post" action="{{ route('verify-otp') }}" class="w-75">
                         @csrf
@@ -27,9 +27,9 @@
                                 </div>
                             @endif
                             <div class="card-body">
-                                <h5 class="card-title mt-3" style="color: white;font-family:monospace;">Confirmation with
+                                <p class="card-title mt-3" style="color: white;font-family:monospace;">Confirmation with
                                     OTP Code
-                                </h5>
+                                </p>
                                 <div class="card-text mt-5">
                                     <div class="form-group mb-3">
                                         <input type="text" name="otp" id="" class="form-control"

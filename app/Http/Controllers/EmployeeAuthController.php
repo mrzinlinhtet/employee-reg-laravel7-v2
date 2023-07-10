@@ -11,14 +11,14 @@ use App\Http\Requests\EmployeeAuthRequest;
 /**
  * EmployeeAuthController for login and logout.
  * @author Zin Lin Htet
- * @created 21/6/2023
+ * @created 21/06/2023
  */
 class EmployeeAuthController extends Controller
 {
     /**
      * When employee login, call this function with passing EmployeeAuthRequest and goto Index page
      * @author Zin Lin Htet
-     * @create 21/6/2023
+     * @create 21/06/2023
      * @param EmployeeAuthRequest $request
      * @return 'redirect'
      */
@@ -46,7 +46,7 @@ class EmployeeAuthController extends Controller
     /**
      * When employee login, validation is not passed, call this function and goto Login page
      * @author Zin Lin Htet
-     * @created 21/6/2023
+     * @created 21/06/2023
      * @return 'view'
      */
     public function show()
@@ -57,7 +57,7 @@ class EmployeeAuthController extends Controller
     /**
      * When employee logout, call this function with passing Request
      * @author Zin Lin Htet
-     * @created 21/6/2023
+     * @created 21/06/2023
      * @param Request $request
      * @return 'redirect'
 

@@ -17,14 +17,14 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 /**
  * GenderExport to build the sheet with defined format
  * @author Zin Lin Htet
- * @created 23/6/2023
+ * @created 23/06/2023
  */
 class GenderExport implements FromCollection, WithTitle, WithEvents, WithColumnWidths, ShouldAutoSize, WithStyles
 {
     /**
      * Define the title name
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @return string
      */
     public function title(): string
@@ -38,7 +38,7 @@ class GenderExport implements FromCollection, WithTitle, WithEvents, WithColumnW
     /**
      * Define the headings name
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @return array
      */
     public function collection()
@@ -57,7 +57,7 @@ class GenderExport implements FromCollection, WithTitle, WithEvents, WithColumnW
     /**
      * Define the style of the excel
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @return array
      */
     public function registerEvents(): array
@@ -106,7 +106,7 @@ class GenderExport implements FromCollection, WithTitle, WithEvents, WithColumnW
     /**
      * Define columnWidths of excel table
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @return array
      */
     public function columnWidths(): array
@@ -121,7 +121,7 @@ class GenderExport implements FromCollection, WithTitle, WithEvents, WithColumnW
     /**
      * Define styles of excel table
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @return array
      */
     public function styles(Worksheet $sheet)

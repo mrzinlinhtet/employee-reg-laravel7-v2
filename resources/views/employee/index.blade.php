@@ -111,8 +111,13 @@
                                 <div class="row mt-3">
                                     <div class="col-md-7"></div>
                                     <div class="col-md-5">
+                                        @if ($employees)
+                                            @php
+                                                 $totalRows = $employees->toArray()['total'];
+                                            @endphp
+                                        @endif
                                         <span class="me-4 float-end">@lang('messages.total_rows')<span
-                                                class="fw-bold">{{ $counts }}
+                                                class="fw-bold">{{ $totalRows }}
                                                 row(s)</span></span>
                                     </div>
                                 </div>

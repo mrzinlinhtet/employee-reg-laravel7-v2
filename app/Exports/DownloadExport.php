@@ -18,7 +18,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 /**
  * Create DownloadExport receive the data for export.
  * @author Zin Lin Htet
- * @created 26/6/2023
+ * @created 26/06/2023
  */
 class DownloadExport implements FromCollection, WithHeadings, WithEvents, WithColumnWidths, ShouldAutoSize, WithStyles, WithTitle
 {
@@ -32,7 +32,7 @@ class DownloadExport implements FromCollection, WithHeadings, WithEvents, WithCo
     /**
      * Define the title name
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @return string
      */
     public function title(): string
@@ -42,7 +42,7 @@ class DownloadExport implements FromCollection, WithHeadings, WithEvents, WithCo
     /**
      * collect the data return to export
      * @author Zin Lin Htet
-     * @create 26/6/2023
+     * @create 26/06/2023
      * @return '$collection'
      */
     public function collection()
@@ -91,7 +91,7 @@ class DownloadExport implements FromCollection, WithHeadings, WithEvents, WithCo
     /**
      * Define the heading name
      * @author Zin Lin Htet
-     * @create 26/6/2023
+     * @create 26/06/2023
      * @return string
      */
     public function headings(): array
@@ -115,14 +115,15 @@ class DownloadExport implements FromCollection, WithHeadings, WithEvents, WithCo
     /**
      * Define the style of the excel
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @return array
      */
     public function registerEvents(): array
     {
         return [
             AfterSheet::class => function (AfterSheet $event) {
-
+                // Word wrap for Address column (column J)
+                $event->sheet->getStyle('J')->getAlignment()->setWrapText(true);
 
                 // Set the height of rows
                 $event->sheet->getRowDimension(1)->setRowHeight(35);
@@ -195,7 +196,7 @@ class DownloadExport implements FromCollection, WithHeadings, WithEvents, WithCo
     /**
      * Define columnWidths of excel table
      * @author Zin Lin Htet
-     * @create 26/6/2023
+     * @create 26/06/2023
      * @return array
      */
     public function columnWidths(): array
@@ -220,7 +221,7 @@ class DownloadExport implements FromCollection, WithHeadings, WithEvents, WithCo
     /**
      * Define styles of excel table
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @return array
      */
     public function styles(Worksheet $sheet)

@@ -9,7 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * EmployeeUpdateRequest to update employee for validation.
  * @author Zin Lin Htet
- * @created 28/6/2023
+ * @created 28/06/2023
  */
 class EmployeeUpdateRequest extends FormRequest
 {
@@ -31,7 +31,7 @@ class EmployeeUpdateRequest extends FormRequest
     /**
      * Rules for update employee validation
      * @author Zin Lin Htet
-     * @created 28/6/2023
+     * @created 28/06/2023
      * @return array
      */
     public function rules()

@@ -4,13 +4,13 @@
 @section('content')
     <div class="container-fluid login-bg">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
                 <div id="spinner" class="d-none d-flex justify-content-center align-items-center" style="height: 100vh;">
                     <span><img src="{{ asset('images/Pulse.gif') }}" style="width: 100px;height: 100px;" alt=""></span>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
                     <form method="post" action="{{ route('login') }}" class="w-75">
                         @csrf

@@ -4,8 +4,6 @@ namespace App\DBTransactions\Employee;
 
 use App\Models\Employee;
 use App\Classes\DBTransaction;
-use Illuminate\Support\Facades\Hash;
-
 
 /**
  *
@@ -16,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 /**
  * UpdateEmployee to update employee.
  * @author Zin Lin Htet
- * @created 28/6/2023
+ * @created 28/06/2023
  */
 class UpdateEmployee extends DBTransaction
 {
@@ -30,7 +28,7 @@ class UpdateEmployee extends DBTransaction
     /**
      * Update the data of employee in DB
      * @author Zin Lin Htet
-     * @create 28/6/2023
+     * @create 28/06/2023
      * @return array
      */
     public function process()

@@ -12,26 +12,26 @@ use App\Imports\EmployeeRegisterImport;
 /**
  * Create ExcelExportImportController to excel export and import.
  * @author Zin Lin Htet
- * @created 23/6/2023
+ * @created 23/06/2023
  */
 class ExcelExportImportController extends Controller
 {
     /**
      * Employee registration Excel file export
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @return $excel
      */
     public function export()
     {
-        $excel = Excel::download(new ExportExcelRegister, 'employee-registration.xlsx');
+        $excel = Excel::download(new ExportExcelRegister, 'EmployeeRegistration.xlsx');
         return $excel;
     }
 
     /**
      * Employee registration Excel file import
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @param Request $request
      * @return 'redirect'
      */

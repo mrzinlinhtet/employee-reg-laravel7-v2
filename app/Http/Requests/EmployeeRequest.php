@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * EmployeeRequest to register employee for validation.
  * @author Zin Lin Htet
- * @created 22/6/2023
+ * @created 22/06/2023
  */
 class EmployeeRequest extends FormRequest
 {
@@ -29,7 +29,7 @@ class EmployeeRequest extends FormRequest
     /**
      * Rules for register employee validation
      * @author Zin Lin Htet
-     * @created 22/6/2023
+     * @created 22/06/2023
      * @return array
      */
     public function rules()
@@ -48,7 +48,7 @@ class EmployeeRequest extends FormRequest
     /**
      * Messages for register employee validation
      * @author Zin Lin Htet
-     * @created 22/6/2023
+     * @created 22/06/2023
      * @return array
      */
     public function messages()

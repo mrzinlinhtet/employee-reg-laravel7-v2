@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * EmployeeAuthRequest to login validation.
  * @author Zin Lin Htet
- * @created 21/6/2023
+ * @created 21/06/2023
  */
 class EmployeeAuthRequest extends FormRequest
 {
@@ -30,7 +30,7 @@ class EmployeeAuthRequest extends FormRequest
     /**
      * Rules for employee login validation
      * @author Zin Lin Htet
-     * @created 21/6/2023
+     * @created 21/06/2023
      * @return array
      */
     public function rules()
@@ -44,7 +44,7 @@ class EmployeeAuthRequest extends FormRequest
     /**
      * Messages for employee login validation
      * @author Zin Lin Htet
-     * @created 21/6/2023
+     * @created 21/06/2023
      * @return array
      */
     public function messages()

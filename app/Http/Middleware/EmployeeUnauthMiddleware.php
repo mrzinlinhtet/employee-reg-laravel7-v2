@@ -9,7 +9,7 @@ use Closure;
  * Handles employee login authentication
  *
  * @author Zin Lin Htet
- * @created 21/6/2023
+ * @created 21/06/2023
  */
 class EmployeeUnauthMiddleware
 {
@@ -22,7 +22,7 @@ class EmployeeUnauthMiddleware
      */
     /**
      * @author Zin Lin Htet
-     * @created 21/6/2023
+     * @created 21/06/2023
      */
     public function handle($request, Closure $next)
     {

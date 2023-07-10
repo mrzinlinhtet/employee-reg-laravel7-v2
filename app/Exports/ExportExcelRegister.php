@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 /**
  * ExportExcelRegister to call the sheets WithMultipleSheets
  * @author Zin Lin Htet
- * @created 23/6/2023
+ * @created 23/06/2023
  */
 class ExportExcelRegister implements WithMultipleSheets
 {
@@ -21,7 +21,7 @@ class ExportExcelRegister implements WithMultipleSheets
     /**
      * Call EmployeeRegistration,Gender and Marital Status to export
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @return array
      */
     public function sheets(): array

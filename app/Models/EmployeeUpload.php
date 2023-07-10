@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * Create employee uploads model for databese.
  *
  * @author Zin Lin Htet
- * @created 21/6/2023
+ * @created 21/06/2023
  */
 class EmployeeUpload extends Model
 {

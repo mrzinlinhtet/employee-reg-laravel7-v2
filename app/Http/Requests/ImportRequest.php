@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * ImportRequest to validate the excel import.
  * @author Zin Lin Htet
- * @created 23/6/2023
+ * @created 23/06/2023
  */
 class ImportRequest extends FormRequest
 {
@@ -29,7 +29,7 @@ class ImportRequest extends FormRequest
     /**
      * Rules of validate the excel import.
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @return array
      */
     public function rules()

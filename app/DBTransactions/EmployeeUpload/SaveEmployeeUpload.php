@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
 /**
  * SaveEmployeeUpload to register employee where photo include.
  * @author Zin Lin Htet
- * @created 22/6/2023
+ * @created 22/06/2023
  */
 class SaveEmployeeUpload extends DBTransaction
 {
@@ -29,7 +29,7 @@ class SaveEmployeeUpload extends DBTransaction
     /**
      * Save the data of employee's photo in DB
      * @author Zin Lin Htet
-     * @create 22/6/2023
+     * @create 22/06/2023
      * @return array
      */
     public function process()

@@ -16,7 +16,7 @@ class CreateEmployeeUploadsTable extends Migration
      * Create employee upload table for databese.
      *
      * @author Zin Lin Htet
-     * @created 21/6/2023
+     * @created 21/06/2023
      */
     public function up()
     {
@@ -27,7 +27,7 @@ class CreateEmployeeUploadsTable extends Migration
                     ->on('employees')
                     ->onDelete('cascade');
             $table->string('file_path',500);
-            $table->string('file_name',500);
+            $table->string('file_name',255);
             $table->integer('file_size');
             $table->string('file_extension',50);
             $table->timestamps();

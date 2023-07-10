@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Create employee model for databese.
  *
  * @author Zin Lin Htet
- * @created 21/6/2023
+ * @created 21/06/2023
  */
 class Employee extends Model
 {

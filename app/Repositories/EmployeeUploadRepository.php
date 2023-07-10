@@ -9,14 +9,14 @@ use App\Interfaces\EmployeeUploadInterface;
  * Data retrieving from employees
  * Create EmployeeRepository
  * @author Zin Lin Htet
- * @created 21/6/2023
+ * @created 21/06/2023
  */
 class EmployeeUploadRepository implements EmployeeUploadInterface
 {
     /**
      * Get one employee data from employee upload table
      * @author Zin Lin Htet
-     * @created 22/6/2023
+     * @created 22/06/2023
      * @param $employee_id
      * @return object
      */

@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 /**
  * EmployeeRegisterImport to call the sheets WithMultipleSheets
  * @author Zin Lin Htet
- * @created 23/6/2023
+ * @created 23/06/2023
  */
 class EmployeeRegisterImport implements WithMultipleSheets
 {
@@ -22,7 +22,7 @@ class EmployeeRegisterImport implements WithMultipleSheets
     /**
      * Method sheets to call the multiple sheets
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @return array
      */
     public function sheets(): array
@@ -36,14 +36,14 @@ class EmployeeRegisterImport implements WithMultipleSheets
 /**
  * FirstSheetImport to save the database with validation
  * @author Zin Lin Htet
- * @created 23/6/2023
+ * @created 23/06/2023
  */
 class FirstSheetImport implements ToCollection
 {
     /**
      * Define the column names of table
      * @author Zin Lin Htet
-     * @create 26/6/2023
+     * @create 26/06/2023
      * @return array
      */
     public function attributeNames()
@@ -66,7 +66,7 @@ class FirstSheetImport implements ToCollection
     /**
      * Collection for importing the data with excel
      * @author Zin Lin Htet
-     * @create 23/6/2023
+     * @create 23/06/2023
      * @param Collection $rows
      * @return 'redirect'
      */

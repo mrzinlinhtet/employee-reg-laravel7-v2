@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 /**
  * SaveEmployee to register employee.
  * @author Zin Lin Htet
- * @created 22/6/2023
+ * @created 22/06/2023
  */
 class SaveEmployee extends DBTransaction
 {
@@ -29,7 +29,7 @@ class SaveEmployee extends DBTransaction
     /**
      * Save the data of employee in DB
      * @author Zin Lin Htet
-     * @create 22/6/2023
+     * @create 22/06/2023
      * @return array
      */
     public function process()

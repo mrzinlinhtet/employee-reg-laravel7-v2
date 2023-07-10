@@ -17,7 +17,7 @@ use App\DBTransactions\EmployeeUpload\UpdateEmployeeUpload;
 /**
  * EmployeeController for register employees.
  * @author Zin Lin Htet
- * @created 22/6/2023
+ * @created 22/06/2023
  */
 class EmployeeController extends Controller
 {
@@ -39,7 +39,7 @@ class EmployeeController extends Controller
     /**
      * Display a listing of all employee orderby id, desc and pagination
      * @author Zin Lin Htet
-     * @create 28/6/2023
+     * @create 28/06/2023
      * @param object
      * @return 'view'
      */
@@ -64,7 +64,7 @@ class EmployeeController extends Controller
     /**
      * When register employee, call this function with auto increase employee_id
      * @author Zin Lin Htet
-     * @create 22/6/2023
+     * @create 22/06/2023
      * @param object
      * @return 'view'
      */
@@ -85,7 +85,7 @@ class EmployeeController extends Controller
     /**
      * When register employee successfully, call this function and store in DB
      * @author Zin Lin Htet
-     * @create 22/6/2023
+     * @create 22/06/2023
      * @param EmployeeRequest $request
      * @return 'redirect'
      */
@@ -124,7 +124,7 @@ class EmployeeController extends Controller
     /**
      * Display the specified employee.
      * @author Zin Lin Htet
-     * @create 26/6/2023
+     * @create 26/06/2023
      * @param $id
      * @return 'view'
      */
@@ -148,7 +148,7 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified employee.
      * @author Zin Lin Htet
-     * @create 26/6/2023
+     * @create 26/06/2023
      * @param $id
      * @return 'view'
      */
@@ -177,7 +177,7 @@ class EmployeeController extends Controller
     /**
      * Update the specified employee.
      * @author Zin Lin Htet
-     * @create 26/6/2023
+     * @create 26/06/2023
      * @param Request $request, $id
      * @return 'redirect'
      */
@@ -230,12 +230,15 @@ class EmployeeController extends Controller
     /**
      * Delete the specified employee.
      * @author Zin Lin Htet
-     * @create 26/6/2023
+     * @create 26/06/2023
      * @param $id
      * @return 'redirect'
      */
     public function destroy($id)
     {
+        $count = $this->employeeInterface->count(); //61
+        // dd($count);
+        $result = $this->employeeInterface->previousPage($id); //4
         $employee = $this->employeeInterface->getEmployeeById($id);
         if (!$employee) {
             return redirect()->back()->with('error', ' Employee deleted Failed!');
@@ -251,8 +254,12 @@ class EmployeeController extends Controller
         if ($employee) {
             $deleteEmployee = new DeleteEmployee($id);
             $deleteEmp = $deleteEmployee->executeProcess();
-            if ($deleteEmp) {
-                return redirect()->back()->with('success', ' Employee has been deleted!');
+            // Redirect to the previous page if the last row on the current page is deleted
+            if ($result > 0 && $result >= round($count / 20)) {
+                $previousPage = $result - 1;
+                return redirect()->route('employees.index', ['page' => $previousPage])->with('success', 'Employee has been deleted!');
+            } elseif ($deleteEmp) {
+                return redirect()->back()->with('success', 'Employee has been deleted!');
             } else {
                 return redirect()->back()->with('error', ' Employee deleted Failed!');
             }
@@ -270,7 +277,7 @@ class EmployeeController extends Controller
     /**
      * Restore the specified employee.
      * @author Zin Lin Htet
-     * @create 28/6/2023
+     * @create 28/06/2023
      * @param $id
      * @return 'redirect'
      */
@@ -298,7 +305,7 @@ class EmployeeController extends Controller
     /**
      * Soft delete the specified employee.
      * @author Zin Lin Htet
-     * @create 28/6/2023
+     * @create 28/06/2023
      * @param $id
      * @return 'redirect'
      */

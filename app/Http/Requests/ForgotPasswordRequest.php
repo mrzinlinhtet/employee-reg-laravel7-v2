@@ -4,6 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * ForgotPasswordRequest for validation when change the password.
+ * @author Zin Lin Htet
+ * @created 10/07/2023
+ */
 class ForgotPasswordRequest extends FormRequest
 {
     /**
@@ -19,6 +24,12 @@ class ForgotPasswordRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
+     * @return array
+     */
+    /**
+     * Rules for change password validation
+     * @author Zin Lin Htet
+     * @created 10/07/2023
      * @return array
      */
     public function rules()
