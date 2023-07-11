@@ -91,21 +91,21 @@
                                 <div class="col-md-3">
                                     <label for="gender" class="text-muted form-label">@lang('messages.gender')</label>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-1">
                                     <div class="form-check">
                                         <input class="form-check-input" disabled type="radio" name="gender"
                                             id="gender1" value="1" {{ $employee->gender == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="gender1">@lang('messages.male')</label>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <div class="form-check">
                                         <input class="form-check-input" disabled type="radio" name="gender"
                                             id="gender2" value="2" {{ $employee->gender == 2 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="gender2">@lang('messages.female')</label>
                                     </div>
                                 </div>
-                                <div class="col-md-2"></div>
+                                <div class="col-md-5"></div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-2"></div>

@@ -29,12 +29,15 @@ Route::group(['middleware' => 'employee.unauth'], function () {
     //forgotPassword
     Route::get('/forgot-password-form', 'ForgotPasswordMailController@getForgotForm')->name('forgot-password');
     Route::post('/forgot-password-form', 'ForgotPasswordMailController@postForgotForm')->name('forgot-password');
-    //changePassword
-    Route::get('/change-password-form', 'ForgotPasswordMailController@getChangePasswordForm')->name('change-password');
-    Route::post('/change-password-form', 'ForgotPasswordMailController@postChangePasswordForm')->name('change-password');
-    //verifyOTP
-    Route::get('/verify-otp-form', 'ForgotPasswordMailController@getVerifyOTPForm')->name('verify-otp');
-    Route::post('/verify-otp-form', 'ForgotPasswordMailController@postVerifyOTPForm')->name('verify-otp');
+    //verify and change password(Protected with ChangePasswordMiddleware)
+    Route::middleware(['change.password'])->group(function () {
+        //verifyOTP
+        Route::get('/verify-otp-form', 'ForgotPasswordMailController@getVerifyOTPForm')->name('verify-otp');
+        Route::post('/verify-otp-form', 'ForgotPasswordMailController@postVerifyOTPForm')->name('verify-otp');
+        //change password
+        Route::get('/change-password-form', 'ForgotPasswordMailController@getChangePasswordForm')->name('change-password');
+        Route::post('/change-password-form', 'ForgotPasswordMailController@postChangePasswordForm')->name('change-password');
+    });
 });
 
 //Routes or controller methods that require employee session

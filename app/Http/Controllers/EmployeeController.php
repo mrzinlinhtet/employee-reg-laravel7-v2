@@ -223,7 +223,6 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-
     /**
      * Delete the specified employee.
      * @author Zin Lin Htet
@@ -238,31 +237,31 @@ class EmployeeController extends Controller
         if (!$employee) {
             return redirect()->back()->with('error', 'Employee deletion failed!');
         }
-        // To restrict deleting the currently logged-in employee
+        //to restrict deleting the currently logged-in employee
         if (session('employee')->id == $id) {
             return redirect()->back()->with('error', 'Cannot delete the currently logged-in employee!');
         }
-        // To restrict deleting an inactive employee
+        //to restrict deleting an inactive employee
         if ($employee->deleted_at != null) {
             return redirect()->back()->with('error', 'Cannot delete an inactive employee!');
         }
         $deleteEmployee = new DeleteEmployee($id);
         $deleteEmp = $deleteEmployee->executeProcess();
-        //Get the url for current page number
+        //get the url for current page number
         $url = url()->previous();
         //Breaks down the URL into its components
         $parsedUrl = parse_url($url);
-        //Extracts the query parameters into an associative array
+        //extracts the query parameters into an associative array
         parse_str($parsedUrl['query'], $queryParameters);
         $currentPage = $queryParameters['page'];
 
         if ($deleteEmp) {
             $perPage = 20; // Replace with your actual pagination per page count
-            // Calculate the total number of pages
+            //calculate the total number of pages
             $totalPages = ceil($this->employeeInterface->count() / $perPage);
-            // Calculate the previous page number
+            //calculate the previous page number
             $previousPage = max(1, $currentPage - 1);
-            // Redirect to the previous page if the last row on the current page is deleted
+            //redirect to the previous page if the last row on the current page is deleted
             if ($currentPage > $totalPages && $previousPage > 0) {
                 return redirect()->route('employees.index', ['page' => $previousPage])->with('success', 'Employee has been deleted!');
             } else {
@@ -321,9 +320,9 @@ class EmployeeController extends Controller
         if ($employee->deleted_at != null) {
             return redirect()->back()->with('error', ' Employee already inactive!');
         }
-        //to restrict to inactive current login employee
+        //to restrict to inactive the currently logged-in employee
         if (session('employee')->id == $id) {
-            return redirect()->back()->with('error', ' Cannot inactive the current login Employee!');
+            return redirect()->back()->with('error', ' Cannot inactive the currently logged-in employee!');
         }
         if ($employee) {
             $employee->delete();
