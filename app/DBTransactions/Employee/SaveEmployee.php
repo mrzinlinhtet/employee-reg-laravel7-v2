@@ -49,7 +49,7 @@ class SaveEmployee extends DBTransaction
         $emp = $emp->save();
 
         if (!$emp) {
-            return ['status' => false, 'error' => 'Failed'];
+            return ['status' => false, 'error' => 'Failed!'];
         }
         return ['status' => true, 'error' => ''];
     }

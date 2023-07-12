@@ -50,7 +50,7 @@ class DeleteEmployee extends DBTransaction
         }
 
         if (!$emp) {
-            return ['status' => false, 'error' => 'Failed'];
+            return ['status' => false, 'error' => 'Failed!'];
         }
         return ['status' => true, 'error' => ''];
     }

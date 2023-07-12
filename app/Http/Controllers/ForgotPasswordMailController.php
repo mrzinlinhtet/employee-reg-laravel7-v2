@@ -44,7 +44,7 @@ class ForgotPasswordMailController extends Controller
             Session::put('verifyEmpId', $employee->id);
             return redirect()->route('verify-otp');
         } else {
-            return redirect()->route('forgot-password')->with(['error' => "$request->email_address is not a valid email address"]);
+            return redirect()->route('forgot-password')->with(['error' => "$request->email_address is not a valid email address!"]);
         }
     }
 
@@ -97,7 +97,7 @@ class ForgotPasswordMailController extends Controller
                 return redirect()->route('change-password');
             }
         } else {
-            return redirect()->route('verify-otp')->with(['error' => "OTP code is not correct"]);
+            return redirect()->route('verify-otp')->with(['error' => "OTP code is not correct!"]);
         }
     }
 
@@ -127,7 +127,7 @@ class ForgotPasswordMailController extends Controller
             $employee->password = Hash::make($request->password);
             if ($employee->update()) {
                 Session::forget('verifyEmpId');
-                return redirect()->route('login')->with('success', 'Password has been updated');
+                return redirect()->route('login')->with('success', 'Password has been updated.');
             }
         }
     }

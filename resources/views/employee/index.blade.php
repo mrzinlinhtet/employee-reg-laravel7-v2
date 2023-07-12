@@ -1,3 +1,21 @@
+@if (isset($employees) && $employees->count() == 0 && $employees->currentPage() > 1)
+    @php
+        //get the current URL
+        $currentUrl = url()->current();
+        //get the URL parameters as an associative array
+        $queryParams = request()->query();
+        //decrease the page value by one
+        $previousPage = $queryParams['page'] - 1;
+        //set the updated page value in the query parameters
+        $queryParams['page'] = $previousPage;
+        //generate the previous page URL with the updated query parameters
+        $previousPageUrl = $currentUrl . '?' . http_build_query($queryParams);
+        //redirect to the previous page URL
+        header('Location: ' . $previousPageUrl);
+        exit();
+    @endphp
+@endif
+
 @extends('layouts.app')
 
 @section('title')
@@ -45,7 +63,7 @@
                                 <form action="{{ route('employees.index') }}" method="GET">
                                     <div class="row mt-4">
                                         <div class="col-md-2">
-                                            <div class="text-muted float-end me-2" >@lang('messages.employee_id')</div>
+                                            <div class="text-muted float-end me-2">@lang('messages.employee_id')</div>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" name="search_employee_id"
@@ -53,7 +71,7 @@
                                         </div>
                                         <div class="col-md-1"></div>
                                         <div class="col-md-2">
-                                            <div class="text-muted float-end me-2" >@lang('messages.employee_code')</div>
+                                            <div class="text-muted float-end me-2">@lang('messages.employee_code')</div>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" name="search_employee_code"
@@ -64,7 +82,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-2">
-                                            <div class="text-muted float-end me-2" >@lang('messages.employee_name')</div>
+                                            <div class="text-muted float-end me-2">@lang('messages.employee_name')</div>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" name="search_employee_name"
@@ -72,7 +90,7 @@
                                         </div>
                                         <div class="col-md-1"></div>
                                         <div class="col-md-2">
-                                            <div class="text-muted float-end me-2" >@lang('messages.employee_email')</div>
+                                            <div class="text-muted float-end me-2">@lang('messages.employee_email')</div>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" name="search_email_address"
@@ -97,8 +115,9 @@
                                                     value="true">@lang('messages.pdf_download')</a>
                                             @endif
                                             @if ($employees->isEmpty())
-                                                <button name="downloadExcel" class="btn btn-outline-dark mx-2 btn-sm excel-btn"
-                                                    value="true" disabled>@lang('messages.excel_download')</button>
+                                                <button name="downloadExcel"
+                                                    class="btn btn-outline-dark mx-2 btn-sm excel-btn" value="true"
+                                                    disabled>@lang('messages.excel_download')</button>
                                             @else
                                                 <a href="{{ route('search-download-excel', request()->query()) }}"
                                                     name="downloadExcel" class="btn btn-outline-dark mx-2 btn-sm excel-btn"
@@ -113,7 +132,7 @@
                                     <div class="col-md-5">
                                         @if ($employees)
                                             @php
-                                                 $totalRows = $employees->toArray()['total'];
+                                                $totalRows = $employees->toArray()['total'];
                                             @endphp
                                         @endif
                                         <span class="me-4 float-end">@lang('messages.total_rows')<span

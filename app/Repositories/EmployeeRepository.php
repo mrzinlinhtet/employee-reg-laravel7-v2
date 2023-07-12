@@ -107,12 +107,4 @@ class EmployeeRepository implements EmployeeInterface
      * @created 21/06/2023
      * @return object
      */
-    public function previousPage($id)
-    {
-        $previousPage = Employee::withTrashed()->where('id', '>', $id)->count();
-        //21 > 39%20 = 1.9
-        //21 >= 40%20 = 2
-        $result = intval(floor(($previousPage / 20)  + 1));
-        return $result;
-    }
 }

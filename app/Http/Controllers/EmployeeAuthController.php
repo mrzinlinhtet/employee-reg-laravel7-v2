@@ -36,10 +36,10 @@ class EmployeeAuthController extends Controller
                 }
                 return redirect()->route('employees.index');
             } else {
-                return redirect()->back()->withErrors(['error' => 'Employee ID and password are not match.']);
+                return redirect()->back()->withErrors(['error' => 'Employee ID and password are not match!']);
             }
         } else {
-            return redirect()->back()->withErrors(['error' => 'Invalid employee ID or password.']);
+            return redirect()->back()->withErrors(['error' => 'Invalid employee ID or password!']);
         }
     }
 

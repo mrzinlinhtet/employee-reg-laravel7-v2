@@ -266,7 +266,7 @@
                                 <div class="row my-3 text-center">
                                     <div class="col-12">
                                         <button style="width: 130px;" type="submit"
-                                            class="btn btn-primary search-btn">@lang('messages.save')</button>
+                                            class="btn btn-info search-btn">@lang('messages.save')</button>
                                     </div>
                                 </div>
                             </form>
@@ -318,7 +318,7 @@
                                 </div>
                                 <div class="row my-3">
                                     <div class="col-12 text-center">
-                                        <button style="width: 130px;" type="submit" class="btn btn-primary search-btn">
+                                        <button style="width: 130px;" type="submit" class="btn btn-info search-btn">
                                             @lang('messages.save')</button>
                                     </div>
                                 </div>

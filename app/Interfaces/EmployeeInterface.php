@@ -11,7 +11,4 @@ interface EmployeeInterface
     public function getEmployeeById($id);
 
     public function count();
-
-    public function previousPage($id);
-
 }

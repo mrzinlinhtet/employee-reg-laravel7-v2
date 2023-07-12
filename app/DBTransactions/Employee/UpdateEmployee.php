@@ -55,7 +55,7 @@ class UpdateEmployee extends DBTransaction
         if ($emp) {
             return ['status' => true, 'error' => ''];
         } else {
-            return ['status' => false, 'error' => 'Failed to update employee'];
+            return ['status' => false, 'error' => 'Failed to update employee!'];
         }
     }
 }

@@ -1,3 +1,11 @@
+@php
+    $currentUrl = url()->current();
+    $previousUrl = url()->previous();
+    if ($currentUrl != $previousUrl) {
+        Session::put('reqReferrer', $previousUrl);
+    }
+@endphp
+
 @extends('layouts.app')
 
 @section('title')
@@ -11,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-10"></div>
                     <div class="col-md-2">
-                        <a href="{{  url()->previous() }}" type="button" class="btn btn-dark back-btn float-end">
+                        <a href="{{ url()->previous() }}" type="button" class="btn btn-dark back-btn float-end">
                             <i class="fa-solid fa-arrow-left"></i> Back</a>
                     </div>
                 </div>
@@ -196,7 +204,7 @@
                             </div>
                             <div class="row my-3 text-center">
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary search-btn">@lang('messages.update')</button>
+                                    <button type="submit" class="btn btn-info search-btn">@lang('messages.update')</button>
                                 </div>
                             </div>
                         </form>

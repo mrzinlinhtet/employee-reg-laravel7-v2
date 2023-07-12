@@ -13,6 +13,7 @@ use App\DBTransactions\Employee\DeleteEmployee;
 use App\DBTransactions\Employee\UpdateEmployee;
 use App\DBTransactions\EmployeeUpload\SaveEmployeeUpload;
 use App\DBTransactions\EmployeeUpload\UpdateEmployeeUpload;
+use Illuminate\Support\Facades\Session;
 
 /**
  * EmployeeController for register employees.
@@ -102,13 +103,13 @@ class EmployeeController extends Controller
             $saveEmployeeUpload = $saveEmployeeUpload->executeProcess();
 
             if ($saveEmployee && $saveEmployeeUpload) {
-                return redirect()->route('employees.index')->with('success', "Employee created successfully");
+                return redirect()->route('employees.index')->with('success', "Employee created successfully.");
             } else {
                 return redirect()->route('employees.index')->with('error', "Employee created Failed!");
             }
         }
         if ($saveEmployee) {
-            return redirect()->route('employees.index')->with('success', "Employee created successfully");
+            return redirect()->route('employees.index')->with('success', "Employee created successfully.");
         } else {
             return redirect()->route('employees.index')->with('error', "Employee created Failed!");
         }
@@ -182,7 +183,6 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeUpdateRequest $request, $id)
     {
-        $previousPage = $this->employeeInterface->previousPage($id);
         // Call UpdateEmployee from DBTransactions
         $updateEmployee = new UpdateEmployee($request, $id);
         $updateResult = $updateEmployee->executeProcess();
@@ -194,7 +194,7 @@ class EmployeeController extends Controller
                 $updateEmployeeUpload = new UpdateEmployeeUpload($request, $id);
                 $updateEmployeeUpload = $updateEmployeeUpload->executeProcess();
                 if ($updateResult && $updateEmployeeUpload) {
-                    return redirect()->route('employees.index', ['page' => $previousPage])->with('success', "Employee updated successfully");
+                    return redirect(Session::get('reqReferrer'))->with('success', "Employee updated successfully.");
                 } else {
                     return redirect()->route('employees.index')->with('error', "Employee updated Failed!");
                 }
@@ -203,7 +203,7 @@ class EmployeeController extends Controller
                 $saveEmployeeUpload = new SaveEmployeeUpload($request);
                 $saveEmployeeUpload = $saveEmployeeUpload->executeProcess();
                 if ($updateResult && $saveEmployeeUpload) {
-                    return redirect()->route('employees.index', ['page' => $previousPage])->with('success', "Employee updated successfully");
+                    return redirect(Session::get('reqReferrer'))->with('success', "Employee updated successfully.");
                 } else {
                     return redirect()->route('employees.index')->with('error', "Employee updated Failed!");
                 }
@@ -211,7 +211,7 @@ class EmployeeController extends Controller
         }
         // Handle the result of the updates
         if ($updateResult) {
-            return redirect()->route('employees.index', ['page' => $previousPage])->with('success', "Employee updated successfully");
+            return redirect(Session::get('reqReferrer'))->with('success', "Employee updated successfully.");
         } else {
             return redirect()->route('employees.index')->with('error', "Employee updated Failed!");
         }
@@ -247,28 +247,11 @@ class EmployeeController extends Controller
         }
         $deleteEmployee = new DeleteEmployee($id);
         $deleteEmp = $deleteEmployee->executeProcess();
-        //get the url for current page number
-        $url = url()->previous();
-        //Breaks down the URL into its components
-        $parsedUrl = parse_url($url);
-        //extracts the query parameters into an associative array
-        parse_str($parsedUrl['query'], $queryParameters);
-        $currentPage = $queryParameters['page'];
-
-        if ($deleteEmp) {
-            $perPage = 20; // Replace with your actual pagination per page count
-            //calculate the total number of pages
-            $totalPages = ceil($this->employeeInterface->count() / $perPage);
-            //calculate the previous page number
-            $previousPage = max(1, $currentPage - 1);
-            //redirect to the previous page if the last row on the current page is deleted
-            if ($currentPage > $totalPages && $previousPage > 0) {
-                return redirect()->route('employees.index', ['page' => $previousPage])->with('success', 'Employee has been deleted!');
-            } else {
-                return redirect()->back()->with('success', 'Employee has been deleted!');
-            }
+        //return error when cannot executeProcess
+        if (!$deleteEmp) {
+            return redirect()->back()->with('error', 'Employee deletion failed!');
         }
-        return redirect()->back()->with('error', 'Employee deletion failed!');
+        return redirect()->back()->with('success', 'Employee has been deleted!');
     }
 
     /**

@@ -71,7 +71,7 @@ class UpdateEmployeeUpload extends DBTransaction
         }
 
         if (!$employeeUpload) {
-            return ['status' => false, 'error' => 'Failed'];
+            return ['status' => false, 'error' => 'Failed!'];
         }
         return ['status' => true, 'error' => ''];
     }

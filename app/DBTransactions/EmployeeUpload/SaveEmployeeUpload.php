@@ -64,7 +64,7 @@ class SaveEmployeeUpload extends DBTransaction
         }
 
         if (!$emp_upload) {
-            return ['status' => false, 'error' => 'Failed'];
+            return ['status' => false, 'error' => 'Failed!'];
         }
         return ['status' => true, 'error' => ''];
     }
