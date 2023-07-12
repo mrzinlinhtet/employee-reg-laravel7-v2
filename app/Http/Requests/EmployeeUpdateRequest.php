@@ -42,7 +42,7 @@ class EmployeeUpdateRequest extends FormRequest
             'employee_code' => 'required',
             'employee_name' => 'required',
             'nrc_number' => 'required|regex:/^[a-zA-Z0-9\/()]+$/',
-            'email_address' => 'required', 'email', Rule::unique('employees', 'email_address')->ignore($id),
+            'email_address' => 'required|email', Rule::unique('employees', 'email_address')->ignore($id),
             'date_of_birth' => 'required|date_format:Y-m-d|before_or_equal:' . date('Y-m-d'),
             'photo' => 'mimes:jpeg,png,jpg,gif|max:10485760', // 10MB
         ];

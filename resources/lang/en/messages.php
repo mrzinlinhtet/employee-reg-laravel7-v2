@@ -40,7 +40,7 @@ return [
     'gender'=> 'Gender',
     'male'=>'Male',
     'female'=>'Female',
-    'date_of_birth'=>'Dirth of Birth',
+    'date_of_birth'=>'Date of Birth',
     'marital_status'=>'Marital Status',
     'select'=>'Select',
     'single' => 'Single',
