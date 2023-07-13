@@ -67,6 +67,9 @@ class EmployeeAuthController extends Controller
         // Clear the employee's session
         session()->forget('employee');
 
+        // Clear the previous route
+        session()->forget('back-previous');
+
         // Redirect to the login page
         return redirect()->route('login.show');
     }

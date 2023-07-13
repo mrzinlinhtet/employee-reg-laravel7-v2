@@ -194,7 +194,7 @@ class EmployeeController extends Controller
                 $updateEmployeeUpload = new UpdateEmployeeUpload($request, $id);
                 $updateEmployeeUpload = $updateEmployeeUpload->executeProcess();
                 if ($updateResult && $updateEmployeeUpload) {
-                    return redirect(Session::get('reqReferrer'))->with('success', "Employee updated successfully.");
+                    return redirect(Session::get('back-previous'))->with('success', "Employee updated successfully.");
                 } else {
                     return redirect()->route('employees.index')->with('error', "Employee updated Failed!");
                 }
@@ -203,7 +203,7 @@ class EmployeeController extends Controller
                 $saveEmployeeUpload = new SaveEmployeeUpload($request);
                 $saveEmployeeUpload = $saveEmployeeUpload->executeProcess();
                 if ($updateResult && $saveEmployeeUpload) {
-                    return redirect(Session::get('reqReferrer'))->with('success', "Employee updated successfully.");
+                    return redirect(Session::get('back-previous'))->with('success', "Employee updated successfully.");
                 } else {
                     return redirect()->route('employees.index')->with('error', "Employee updated Failed!");
                 }
@@ -211,7 +211,7 @@ class EmployeeController extends Controller
         }
         // Handle the result of the updates
         if ($updateResult) {
-            return redirect(Session::get('reqReferrer'))->with('success', "Employee updated successfully.");
+            return redirect(Session::get('back-previous'))->with('success', "Employee updated successfully.");
         } else {
             return redirect()->route('employees.index')->with('error', "Employee updated Failed!");
         }

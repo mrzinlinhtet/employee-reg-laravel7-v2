@@ -417,7 +417,7 @@
         const password = document.getElementById('passwordInput');
 
         function generatePassword() {
-            let length = Math.floor(Math.random() * 5) + 4; // Random length between 4 and 8
+            let length = 8; // Fixed length of 8 characters
             let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
         let dummyPassword = "";
 
