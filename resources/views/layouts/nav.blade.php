@@ -3,11 +3,12 @@
         <div class="col-12 p-0 m-0">
             <nav class="navbar bg-green fixed-top navbar-expand-lg">
                 <div class="container-fluid">
-                    <a class="p-2 rounded" href="{{ route('employees.index') }}">
+                    <a class="p-2 rounded nav-loading" href="{{ route('employees.index') }}">
                         <img src="/images/logo-modified.png" alt="Bootstrap" width="45" height="40" class="">
                     </a>
-                    <a class="navbar-brand small-text text-white" style="color: white;font-family:monospace;"
-                        href="{{ route('employees.index') }}"> @lang('messages.employee_registration_system')
+                    <a class="navbar-brand small-text text-white nav-loading"
+                        style="color: white;font-family:monospace;" href="{{ route('employees.index') }}">
+                        @lang('messages.employee_registration_system')
                     </a>
                     <button class="navbar-toggler bg-white mt-1" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -19,7 +20,7 @@
                             <li class="nav-item my-auto">
                                 <div class="nav-link">
                                     <a href="{{ route('employees.create', ['formSelector' => 'form1']) }}"
-                                        class="mx-2 {{ request()->path() == 'employees/create' ? 'shadow text-dark bg-white p-2 rounded-2' : 'text-white' }}">
+                                        class="nav-loading mx-2 {{ request()->path() == 'employees/create' ? 'shadow text-dark bg-white p-2 rounded-2' : 'text-white' }}">
                                         <span class="">@lang('messages.register')</span>
                                     </a>
                                 </div>
@@ -27,7 +28,7 @@
                             <li class="nav-item my-auto">
                                 <div class="nav-link">
                                     <a href="{{ route('employees.index') }}"
-                                        class="mx-2 {{ request()->path() == 'employees' ? 'shadow text-dark bg-white p-2 rounded-2' : 'text-white' }}">
+                                        class="nav-loading mx-2 {{ request()->path() == 'employees' ? 'shadow text-dark bg-white p-2 rounded-2' : 'text-white' }}">
                                         <span class="">@lang('messages.employee_list')</span>
                                     </a>
                                 </div>
@@ -49,13 +50,13 @@
 
                                         <div class="dropdown-menu text-left lang-style"
                                             aria-labelledby="dropdownMenuLink">
-                                            <a href="/language/en" class="btn btn-info dropdown-item">
+                                            <a href="/language/en" class="btn btn-info dropdown-item nav-loading">
                                                 <img src="{{ asset('images/flag-english.png') }}" style=""
-                                                    alt="" class="img-fluid img-style">
+                                                    alt="" class="img-fluid img-style nav-loading">
                                                 <span class="text-dark">English</span></a>
-                                            <a href="/language/mm" class="btn btn-info dropdown-item">
+                                            <a href="/language/mm" class="btn btn-info dropdown-item nav-loading">
                                                 <img src="{{ asset('images/flag-myanmar.png') }}" style=""
-                                                    alt="" class="img-fluid img-style">
+                                                    alt="" class="img-fluid img-style nav-loading">
                                                 <span class="text-dark">Myanmar</span></a>
                                         </div>
                                     </div>
@@ -84,7 +85,7 @@
                                                             class="d-none">{{ $employeeID = session('employee.id') }}</span>
                                                     @endif
                                                     <a href="{{ route('employees.show', $employeeID) }}"
-                                                        class="btn btn-info dropdown-item">
+                                                        class="btn btn-info dropdown-item detail-loading">
                                                         <i class="fa-solid fa-user text-dark"></i>
                                                         <span class="text-dark">@lang('messages.myprofile')</span></a>
                                                 </div>
@@ -117,10 +118,10 @@
                 @lang('messages.logout_text')
             </div>
             <div class="modal-footer">
-                <a href="#"><button type="button" class="btn btn-secondary"
+                <a href="#"><button type="button" class="btn btn-secondary nav-loading"
                         data-bs-dismiss="modal">@lang('messages.cancel')</button></a>
                 <a href="{{ route('logout') }}"><button type="button"
-                        class="btn btn-info">@lang('messages.ok')</button></a>
+                        class="btn btn-info nav-loading">@lang('messages.ok')</button></a>
             </div>
         </div>
     </div>

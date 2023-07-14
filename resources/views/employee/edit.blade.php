@@ -1,11 +1,3 @@
-@php
-    $currentUrl = url()->current();
-    $previousUrl = url()->previous();
-    if ($currentUrl != $previousUrl) {
-        Session::put('back-previous', $previousUrl);
-    }
-@endphp
-
 @extends('layouts.app')
 
 @section('title')
@@ -19,7 +11,8 @@
                 <div class="row">
                     <div class="col-md-10"></div>
                     <div class="col-md-2">
-                        <a href="{{ Session::get('back-previous') }}" type="button" class="btn btn-dark back-btn float-end">
+                        <a href="{{ Session::get('previous-url-edit' . $employee->id) }}" type="button"
+                            class="btn btn-dark back-btn float-end back-loading">
                             <i class="fa-solid fa-arrow-left"></i> Back</a>
                     </div>
                 </div>
@@ -64,7 +57,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <input type="text" name="employee_code" id="" class="form-control"
-                                        value="{{ old("employee_code",$employee->employee_code) }}">
+                                        value="{{ old('employee_code', $employee->employee_code) }}">
                                     @error('employee_code')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -79,7 +72,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <input type="text" name="employee_name" id="" class="form-control"
-                                        value="{{ old("employee_name",$employee->employee_name) }}">
+                                        value="{{ old('employee_name', $employee->employee_name) }}">
                                     @error('employee_name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -94,7 +87,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <input type="text" name="nrc_number" id="" class="form-control"
-                                        value="{{ old("nrc_number",$employee->nrc_number) }}">
+                                        value="{{ old('nrc_number', $employee->nrc_number) }}">
                                     @error('nrc_number')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -109,7 +102,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <input type="text" name="email_address" id="" class="form-control"
-                                         value="{{ old("email_address",$employee->email_address)}}">
+                                        value="{{ old('email_address', $employee->email_address) }}">
                                     @error('email_address')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -124,14 +117,14 @@
                                 <div class="col-md-1">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="gender" id="gender1"
-                                            value="1" {{ old("gender",$employee->gender) == 1 ? 'checked' : '' }}>
+                                            value="1" {{ old('gender', $employee->gender) == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="gender1">@lang('messages.male')</label>
                                     </div>
                                 </div>
                                 <div class="col-md-1">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="gender" id="gender2"
-                                            value="2" {{ old("gender",$employee->gender) == 2 ? 'checked' : '' }}>
+                                            value="2" {{ old('gender', $employee->gender) == 2 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="gender2">@lang('messages.female')</label>
                                     </div>
                                 </div>
@@ -145,7 +138,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <input type="date" name="date_of_birth" id="" class="form-control"
-                                        value="{{ old("date_of_birth",$employee->date_of_birth) }}">
+                                        value="{{ old('date_of_birth', $employee->date_of_birth) }}">
                                     @error('date_of_birth')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -160,11 +153,14 @@
                                 <div class="col-md-5">
                                     <select name="marital_status" id="marital_status" class="form-control">
                                         <option value="">---@lang('messages.select')---</option>
-                                        <option value="1" {{ old("marital_status",$employee->marital_status) == 1 ? 'selected' : '' }}>
+                                        <option value="1"
+                                            {{ old('marital_status', $employee->marital_status) == 1 ? 'selected' : '' }}>
                                             @lang('messages.single')</option>
-                                        <option value="2" {{ old("marital_status",$employee->marital_status) == 2 ? 'selected' : '' }}>
+                                        <option value="2"
+                                            {{ old('marital_status', $employee->marital_status) == 2 ? 'selected' : '' }}>
                                             @lang('messages.married')</option>
-                                        <option value="3" {{ old("marital_status",$employee->marital_status) == 3 ? 'selected' : '' }}>
+                                        <option value="3"
+                                            {{ old('marital_status', $employee->marital_status) == 3 ? 'selected' : '' }}>
                                             @lang('messages.divorce')</option>
                                     </select>
                                 </div>
@@ -176,7 +172,7 @@
                                     <label for="" class="text-muted form-label">@lang('messages.address')</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <textarea name="address" id="" cols="10" rows="3" class="form-control">{{ old("address",$employee->address) }}</textarea>
+                                    <textarea name="address" id="" cols="10" rows="3" class="form-control">{{ old('address', $employee->address) }}</textarea>
                                 </div>
                                 <div class="col-md-2"></div>
                             </div>

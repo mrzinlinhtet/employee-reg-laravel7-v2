@@ -5,11 +5,7 @@
     <div class="container-fluid login-bg">
         <div class="row">
             <div class="col-md-5"></div>
-            <div class="col-md-2">
-                <div id="spinner" class="d-none d-flex justify-content-center align-items-center" style="height: 100vh;">
-                    <span><img src="{{ asset('images/Pulse.gif') }}" style="width: 100px;height: 100px;" alt=""></span>
-                </div>
-            </div>
+            <div class="col-md-2"></div>
             <div class="col-md-5">
                 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
                     <form method="post" action="{{ route('forgot-password') }}" class="w-75">
@@ -31,7 +27,8 @@
                                 </div>
                             @endif
                             <div class="card-body">
-                                <p class="card-title mt-3" style="color: white;font-family:monospace;">We will send you an email to reset your password.
+                                <p class="card-title mt-3" style="color: white;font-family:monospace;">We will send you an
+                                    email to reset your password.
                                 </p>
                                 <div class="card-text mt-5">
                                     <div class="form-group mb-3">
@@ -54,21 +51,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('footer')
-<script>
-    $(document).ready(function() {
-        // Target the continue button
-        $('#continue-btn').click(function() {
-            // remove d-none before the timeout
-            $('#spinner').removeClass('d-none');
-            // Set a timeout of seconds (1000 milliseconds)
-            setTimeout(function() {
-                // add d-none after the timeout
-                $('#spinner').addClass('d-none');
-            }, 7000);
-        });
-    });
-</script>
 @endsection

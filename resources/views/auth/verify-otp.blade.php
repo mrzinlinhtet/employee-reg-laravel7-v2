@@ -34,7 +34,7 @@
                                     <div class="form-group mb-3">
                                         <input type="text" name="otp" id="" class="form-control"
                                             placeholder="Enter OTP Code" autocomplete="off">
-                                        <input type="text" name="empid" value='{{ Session::get('verifyEmpId') }}'
+                                        <input type="text" name="empid" value='{{ Session::get('verify-empid') }}'
                                             hidden />
                                     </div>
 

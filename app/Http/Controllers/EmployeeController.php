@@ -133,6 +133,15 @@ class EmployeeController extends Controller
         //Get required employee
         $employee = $this->employeeInterface->getEmployeeById($id);
         if ($employee) {
+            $currentUrl = url()->current();
+            $previousUrl = url()->previous();
+            if ($currentUrl != $previousUrl) {
+                //start session for previousURL in detail page
+                Session::put('previous-url-detail' . $id, $previousUrl);
+            }
+            if (session('employee')->id == $id) {
+                Session::put('previous-url-detail' . $id, route('employees.index'));
+            }
             $emp_id = $this->employeeUploadInterface->getEmployeeUploadByEmpId($employee->employee_id);
             return view('employee.show', ['employee' => $employee, 'emp_id' => $emp_id]);
         }
@@ -154,6 +163,12 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
+        $currentUrl = url()->current();
+        $previousUrl = url()->previous();
+        if ($currentUrl != $previousUrl) {
+            //start session for previousURL
+            Session::put('previous-url-edit' . $id, $previousUrl);
+        }
         //Get required employee
         $employee = $this->employeeInterface->getEmployeeById($id);
         //to restrict inactive employee to edit
@@ -186,6 +201,10 @@ class EmployeeController extends Controller
         // Call UpdateEmployee from DBTransactions
         $updateEmployee = new UpdateEmployee($request, $id);
         $updateResult = $updateEmployee->executeProcess();
+        //get previous page from session
+        $previousPage = Session::get('previous-url-edit' . $id);
+        //end session for previousURL when update 
+        session()->forget('previous-url-edit' . $id);
         // Check if a new photo is being uploaded
         if ($request->hasFile('photo')) {
             // Call UpdateEmployeeUpload from DBTransactions
@@ -194,7 +213,7 @@ class EmployeeController extends Controller
                 $updateEmployeeUpload = new UpdateEmployeeUpload($request, $id);
                 $updateEmployeeUpload = $updateEmployeeUpload->executeProcess();
                 if ($updateResult && $updateEmployeeUpload) {
-                    return redirect(Session::get('back-previous'))->with('success', "Employee updated successfully.");
+                    return redirect()->to($previousPage)->with('success', "Employee updated successfully.");
                 } else {
                     return redirect()->route('employees.index')->with('error', "Employee updated Failed!");
                 }
@@ -203,7 +222,7 @@ class EmployeeController extends Controller
                 $saveEmployeeUpload = new SaveEmployeeUpload($request);
                 $saveEmployeeUpload = $saveEmployeeUpload->executeProcess();
                 if ($updateResult && $saveEmployeeUpload) {
-                    return redirect(Session::get('back-previous'))->with('success', "Employee updated successfully.");
+                    return  redirect()->to($previousPage)->with('success', "Employee updated successfully.");
                 } else {
                     return redirect()->route('employees.index')->with('error', "Employee updated Failed!");
                 }
@@ -211,7 +230,7 @@ class EmployeeController extends Controller
         }
         // Handle the result of the updates
         if ($updateResult) {
-            return redirect(Session::get('back-previous'))->with('success', "Employee updated successfully.");
+            return redirect()->to($previousPage)->with('success', "Employee updated successfully.");
         } else {
             return redirect()->route('employees.index')->with('error', "Employee updated Failed!");
         }
@@ -223,6 +242,7 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
+
     /**
      * Delete the specified employee.
      * @author Zin Lin Htet

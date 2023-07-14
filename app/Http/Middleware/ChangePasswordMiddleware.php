@@ -26,9 +26,9 @@ class ChangePasswordMiddleware
      */
     public function handle($request, Closure $next)
     {
-        // Check if the session contains the 'verifyEmpId' key
-        if (!session()->has('verifyEmpId')) {
-            // If the 'verifyEmpId' key is not present, redirect to a different route
+        // Check if the session contains the 'verify-empid' key
+        if (!session()->has('verify-empid')) {
+            // If the 'verify-empid' key is not present, redirect to a different route
             return redirect()->route('login');
         }
 

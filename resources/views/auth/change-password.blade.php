@@ -29,7 +29,7 @@
                                     <div class="form-group mb-3">
                                         <input type="password" name="confirm_password" id="" class="form-control"
                                             placeholder="Enter Confirm Password" autocomplete="off">
-                                        <input type="text" name="empid" value='{{ Session::get('verifyEmpId') }}'
+                                        <input type="text" name="empid" value='{{ Session::get('verify-empid') }}'
                                             hidden />
                                     </div>
                                     <span class="fw-light text-muted" style="font-size: 12px;">*Password must be

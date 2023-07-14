@@ -14,7 +14,28 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <script src="{{ asset('js/app.js') }}" type="text/js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous">
+    </script>
+
     <style>
+        #loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.75) url("/images/Pulse.gif") no-repeat center center;
+            z-index: 99999;
+        }
+
         .pdf-btn {
             right: 180px;
             position: absolute;
@@ -339,6 +360,7 @@
 
         }
     </style>
+
     <style>
         .toggle-password {
             cursor: pointer;
@@ -346,6 +368,7 @@
             user-select: none;
         }
     </style>
+
     <title>
         @yield('title')
     </title>
@@ -355,6 +378,7 @@
 </head>
 
 <body>
+    <div id='loader'></div>
 
     @if (session()->has('employee'))
         @include('layouts.nav')
@@ -362,16 +386,16 @@
 
     @yield('content')
 
-
-    <script src="{{ asset('js/app.js') }}" type="text/js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
-        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous">
+    <script>
+        $(function() {
+            $("form").submit(function() {
+                $('#loader').show();
+            });
+            $('.detail-loading, .edit-loading, .nav-loading, .back-loading').on('click', function() {
+                $('#loader').show();
+            });
+        });
     </script>
-
-
 
     @yield('footer')
 </body>

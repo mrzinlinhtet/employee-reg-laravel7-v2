@@ -5,11 +5,7 @@
     <div class="container-fluid login-bg">
         <div class="row">
             <div class="col-md-5"></div>
-            <div class="col-md-2">
-                <div id="spinner" class="d-none d-flex justify-content-center align-items-center" style="height: 100vh;">
-                    <span><img src="{{ asset('images/Pulse.gif') }}" style="width: 100px;height: 100px;" alt=""></span>
-                </div>
-            </div>
+            <div class="col-md-2"></div>
             <div class="col-md-5">
                 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
                     <form method="post" action="{{ route('login') }}" class="w-75">
@@ -83,20 +79,6 @@
                 passwordInput.attr('type', 'password');
                 togglePassword.html('<i class="fas fa-eye"></i>');
             }
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            // Target the login button
-            $('#login').click(function() {
-                // remove d-none before the timeout
-                $('#spinner').removeClass('d-none');
-                // Set a timeout of seconds (1000 milliseconds)
-                setTimeout(function() {
-                    // add d-none after the timeout
-                    $('#spinner').addClass('d-none');
-                }, 2000);
-            });
         });
     </script>
 @endsection

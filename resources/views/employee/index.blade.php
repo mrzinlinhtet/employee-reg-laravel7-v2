@@ -176,12 +176,12 @@
                                                                 @else
                                                                     <a
                                                                         href="{{ route('employees.edit', $employee->id) }}"><i
-                                                                            class="fa-solid text-success fa-pen-to-square fa-xl"></i></a>
+                                                                            class="fa-solid text-success fa-pen-to-square fa-xl edit-loading"></i></a>
                                                                 @endif
                                                             </td>
                                                             <td>
                                                                 <a href="{{ route('employees.show', $employee->id) }}"><i
-                                                                        class="fa-solid text-info fa-circle-info fa-xl"></i></a>
+                                                                        class="fa-solid text-info fa-circle-info fa-xl detail-loading"></i></a>
                                                             </td>
                                                             <td>
                                                                 @if ($employee->deleted_at != null)

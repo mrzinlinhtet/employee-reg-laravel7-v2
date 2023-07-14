@@ -41,7 +41,7 @@ class ForgotPasswordMailController extends Controller
         $employee = Employee::where('email_address', $request->email_address)->first();
         if ($employee) {
             $this->generateOTP($employee);
-            Session::put('verifyEmpId', $employee->id);
+            Session::put('verify-empid', $employee->id);
             return redirect()->route('verify-otp');
         } else {
             return redirect()->route('forgot-password')->with(['error' => "$request->email_address is not a valid email address!"]);
@@ -126,7 +126,7 @@ class ForgotPasswordMailController extends Controller
         if ($employee) {
             $employee->password = Hash::make($request->password);
             if ($employee->update()) {
-                Session::forget('verifyEmpId');
+                Session::forget('verify-empid');
                 return redirect()->route('login')->with('success', 'Password has been updated.');
             }
         }

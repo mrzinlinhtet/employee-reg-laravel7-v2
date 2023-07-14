@@ -41,7 +41,7 @@ Route::group(['middleware' => 'employee.unauth'], function () {
 });
 
 //Routes or controller methods that require employee session
-Route::group(['middleware' => 'employee.session'], function () {
+Route::group(['middleware' => 'employee.auth'], function () {
     //call all function from EmployeeController with resource
     Route::resource('employees', 'EmployeeController');
     //search and download excel

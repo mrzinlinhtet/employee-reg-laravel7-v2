@@ -11,21 +11,29 @@
                 <div class="row">
                     <div class="col-md-10"></div>
                     <div class="col-md-2">
-                        <a href="{{  url()->previous() }}" type="button" class="btn btn-dark back-btn float-end">
+                        <a href="{{ Session::get('previous-url-detail' . $employee->id) }}" type="button"
+                            class="btn btn-dark back-btn float-end back-loading">
                             <i class="fa-solid fa-arrow-left"></i> Back</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <form>
-                            <div class="row my-2">
-                                <div class="col-md-12 d-flex justify-content-center">
-                                    @isset($emp_id->file_name)
+                            @if (!empty($emp_id->file_name))
+                                <div class="row my-2">
+                                    <div class="col-md-12 d-flex justify-content-center">
                                         <img src="{{ asset('uploads/' . $emp_id->file_name) }}" alt=""
                                             class="img-fluid img-thumbnail w-25 rounded">
-                                    @endisset
+                                    </div>
                                 </div>
-                            </div>
+                            @elseif (empty($emp_id->file_name))
+                                <div class="row my-2">
+                                    <div class="col-md-12 d-flex justify-content-center">
+                                        <img src="{{ asset('images/user.png') }}" alt=""
+                                            class="img-fluid img-thumbnail w-25 rounded">
+                                    </div>
+                                </div>
+                            @endif
                             <div class="row my-3">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-3">
