@@ -37,7 +37,7 @@
                             <li class="nav-item my-auto">
                                 <div class="nav-link">
                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                        <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             @if (session('locale') == 'en')
                                                 <img src="{{ asset('images/flag-english.png') }}" style=""
@@ -118,7 +118,7 @@
                 @lang('messages.logout_text')
             </div>
             <div class="modal-footer">
-                <a href="#"><button type="button" class="btn btn-secondary nav-loading"
+                <a href=""><button type="button" class="btn btn-secondary nav-loading"
                         data-bs-dismiss="modal">@lang('messages.cancel')</button></a>
                 <a href="{{ route('logout') }}"><button type="button"
                         class="btn btn-info nav-loading">@lang('messages.ok')</button></a>
