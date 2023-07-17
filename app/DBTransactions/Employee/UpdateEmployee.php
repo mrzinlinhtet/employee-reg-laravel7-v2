@@ -35,8 +35,9 @@ class UpdateEmployee extends DBTransaction
     {
         $request = $this->request;
         $id = $this->id;
+
         // Get the specified employee
-        $emp = Employee::find($id);
+        $emp = Employee::withTrashed()->find($id);
         $emp->employee_code = $request->employee_code;
         $emp->employee_name = $request->employee_name;
         $emp->nrc_number = $request->nrc_number;

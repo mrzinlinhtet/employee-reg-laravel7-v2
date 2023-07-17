@@ -35,8 +35,8 @@ class EmployeeRequest extends FormRequest
     public function rules()
     {
         return [
-            'employee_code' => 'required',
-            'employee_name' => 'required',
+            'employee_code' => 'required|max:25',
+            'employee_name' => 'required|max:25',
             'nrc_number' => 'required|regex:/^[a-zA-Z0-9\/()]+$/',
             'password' => 'required|regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{4,8}$/',
             'email_address' => 'required|email|unique:employees,email_address',

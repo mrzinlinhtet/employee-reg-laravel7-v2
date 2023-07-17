@@ -171,9 +171,15 @@ class EmployeeController extends Controller
         }
         //Get required employee
         $employee = $this->employeeInterface->getEmployeeById($id);
-        //to restrict inactive employee to edit
+        //get previous page from session
+        $previousPage = Session::get('previous-url-edit' . $id);
+        //to restrict trying to active if no employee in db
+        if (!$employee) {
+            return redirect()->to($previousPage)->with('error', 'Employee not found!');
+        }
+        //to restrict to inactive employee to inactive again
         if ($employee->deleted_at != null) {
-            return redirect()->back()->with('error', ' Cannot edit inactive Employee!');
+            return redirect()->to($previousPage)->with('error', ' Employee is inactive, please do active first!');
         }
         if ($employee) {
             $emp_id = $this->employeeUploadInterface->getEmployeeUploadByEmpId($employee->employee_id);
@@ -198,24 +204,34 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeUpdateRequest $request, $id)
     {
-        // Call UpdateEmployee from DBTransactions
-        $updateEmployee = new UpdateEmployee($request, $id);
-        $updateResult = $updateEmployee->executeProcess();
+        $employee = $this->employeeInterface->getEmployeeById($id);
         //get previous page from session
         $previousPage = Session::get('previous-url-edit' . $id);
+        //to restrict trying to active if no employee in db
+        if (!$employee) {
+            return redirect()->to($previousPage)->with('error', 'Employee not found!');
+        }
+        //to restrict to inactive employee to inactive again
+        if ($employee->deleted_at != null) {
+            return redirect()->to($previousPage)->with('error', ' Employee is inactive, please do active first!');
+        }
+        //call UpdateEmployee from DBTransactions
+        $updateEmployee = new UpdateEmployee($request, $id);
+        $updateResult = $updateEmployee->executeProcess();
         //end session for previousURL when update 
         session()->forget('previous-url-edit' . $id);
-        // Check if a new photo is being uploaded
+        //check if a new photo is being uploaded
         if ($request->hasFile('photo')) {
-            // Call UpdateEmployeeUpload from DBTransactions
+            //call UpdateEmployeeUpload from DBTransactions
             $photoExist = $this->employeeUploadInterface->getEmployeeUploadByEmpId($request->employee_id);
             if ($photoExist) {
+                //call UpdateEmployeeUpload from DBTransactions
                 $updateEmployeeUpload = new UpdateEmployeeUpload($request, $id);
                 $updateEmployeeUpload = $updateEmployeeUpload->executeProcess();
                 if ($updateResult && $updateEmployeeUpload) {
                     return redirect()->to($previousPage)->with('success', "Employee updated successfully.");
                 } else {
-                    return redirect()->route('employees.index')->with('error', "Employee updated Failed!");
+                    return redirect()->to($previousPage)->with('error', "Employee updated Failed!");
                 }
             } elseif (!$photoExist) {
                 //call SaveEmployeeUpload from DBTransactions
@@ -224,15 +240,15 @@ class EmployeeController extends Controller
                 if ($updateResult && $saveEmployeeUpload) {
                     return  redirect()->to($previousPage)->with('success', "Employee updated successfully.");
                 } else {
-                    return redirect()->route('employees.index')->with('error', "Employee updated Failed!");
+                    return redirect()->to($previousPage)->with('error', "Employee updated Failed!");
                 }
             }
         }
-        // Handle the result of the updates
+        //handle the result of the updates
         if ($updateResult) {
             return redirect()->to($previousPage)->with('success', "Employee updated successfully.");
         } else {
-            return redirect()->route('employees.index')->with('error', "Employee updated Failed!");
+            return redirect()->to($previousPage)->with('error', "Employee updated Failed!");
         }
     }
 
@@ -253,9 +269,8 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         $employee = $this->employeeInterface->getEmployeeById($id);
-
         if (!$employee) {
-            return redirect()->back()->with('error', 'Employee deletion failed!');
+            return redirect()->back()->with('error', 'Employee not found!');
         }
         //to restrict deleting the currently logged-in employee
         if (session('employee')->id == $id) {
@@ -265,6 +280,7 @@ class EmployeeController extends Controller
         if ($employee->deleted_at != null) {
             return redirect()->back()->with('error', 'Cannot delete an inactive employee!');
         }
+        //call DeleteEmployee from DBTransactions
         $deleteEmployee = new DeleteEmployee($id);
         $deleteEmp = $deleteEmployee->executeProcess();
         //return error when cannot executeProcess
@@ -291,9 +307,13 @@ class EmployeeController extends Controller
     public function restore($id)
     {
         $employee = $this->employeeInterface->getEmployeeById($id);
+        //to restrict trying to active if no employee in db
+        if (!$employee) {
+            return redirect()->back()->with('error', 'Employee not found!');
+        }
         //to restrict active employee to active again
         if ($employee->deleted_at == null) {
-            return redirect()->back()->with('error', ' Employee already active!');
+            return redirect()->back()->with('error', 'Employee already active!');
         }
         if ($employee) {
             $employee->restore();
@@ -319,6 +339,10 @@ class EmployeeController extends Controller
     public function softDelete($id)
     {
         $employee = $this->employeeInterface->getEmployeeById($id);
+        //to restrict trying to inactive if no employee in db
+        if (!$employee) {
+            return redirect()->back()->with('error', 'Employee not found!');
+        }
         //to restrict to inactive employee to inactive again
         if ($employee->deleted_at != null) {
             return redirect()->back()->with('error', ' Employee already inactive!');

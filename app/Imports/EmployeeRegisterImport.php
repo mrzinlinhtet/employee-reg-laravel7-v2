@@ -106,7 +106,7 @@ class FirstSheetImport implements ToCollection
                 '3' => 'required|regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{4,8}$/',
                 '4' => 'required|email|unique:employees,email_address',
                 '5' => 'nullable|in:1,2',
-                '6' => 'required',
+                '6' => 'required|date_format:Y-m-d',
                 '7' => 'nullable|in:1,2,3',
                 '8' => 'nullable'
             ];

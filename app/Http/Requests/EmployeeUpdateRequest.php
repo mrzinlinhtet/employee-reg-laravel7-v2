@@ -39,8 +39,8 @@ class EmployeeUpdateRequest extends FormRequest
         // $employee = Employee::where("employee_id", request()->employee_id)->first();
         $id = $this->route('employee');
         return [
-            'employee_code' => 'required',
-            'employee_name' => 'required',
+            'employee_code' => 'required|max:25',
+            'employee_name' => 'required|max:25',
             'nrc_number' => 'required|regex:/^[a-zA-Z0-9\/()]+$/',
             'email_address' => ['required','email', Rule::unique('employees', 'email_address')->ignore($id)],
             'date_of_birth' => 'required|date_format:Y-m-d|before_or_equal:' . date('Y-m-d'),
