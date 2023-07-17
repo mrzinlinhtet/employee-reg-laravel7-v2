@@ -108,20 +108,24 @@
                                             @endif --}}
                                             @if ($employees->isEmpty())
                                                 <button name="" class="btn btn-outline-dark mx-2 btn-sm pdf-btn"
-                                                    value="true" disabled>@lang('messages.pdf_download')</button>
+                                                    value="true" disabled><i
+                                                class='fa-solid fa-file-excel me-1'></i>@lang('messages.pdf_download')</button>
                                             @else
                                                 <a href="{{ route('search-download-pdf', request()->query()) }}"
                                                     name="" class="btn btn-outline-dark mx-2 btn-sm pdf-btn"
-                                                    value="true">@lang('messages.pdf_download')</a>
+                                                    value="true"><i
+                                                class='fa-solid fa-file-excel me-1'></i>@lang('messages.pdf_download')</a>
                                             @endif
                                             @if ($employees->isEmpty())
                                                 <button name="downloadExcel"
                                                     class="btn btn-outline-dark mx-2 btn-sm excel-btn" value="true"
-                                                    disabled>@lang('messages.excel_download')</button>
+                                                    disabled><i
+                                                class='fa-solid fa-file-excel me-1'></i>@lang('messages.excel_download')</button>
                                             @else
                                                 <a href="{{ route('search-download-excel', request()->query()) }}"
                                                     name="downloadExcel" class="btn btn-outline-dark mx-2 btn-sm excel-btn"
-                                                    value="true">@lang('messages.excel_download')</a>
+                                                    value="true"><i
+                                                class='fa-solid fa-file-excel me-1'></i>@lang('messages.excel_download')</a>
                                             @endif
                                         </div>
                                     </div>
