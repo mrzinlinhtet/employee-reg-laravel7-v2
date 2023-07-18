@@ -50,11 +50,7 @@ class EmployeeAuthRequest extends FormRequest
     public function messages()
     {
         return [
-            'employee_id.required' => 'Please type Employee ID',
-            'employee_id.integer' => 'Invalid Employee ID',
-            'employee_id.exists' => 'Employee ID is not registered yet',
-            'password.required' => 'Please type Password',
-
+            'employee_id.integer' => 'The selected employee id is invalid.',
         ];
     }
 }

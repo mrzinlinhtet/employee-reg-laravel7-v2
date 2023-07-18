@@ -285,7 +285,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <a href="{{ route('reg-export') }}"
-                                            class="btn btn-success btn-sm float-end mb-2"><i
+                                            class="btn btn-outline-dark btn-sm float-end mb-2"><i
                                                 class='fa-solid fa-file-excel'></i> @lang('messages.excel_download_format')</a>
                                     </div>
                                 </div>

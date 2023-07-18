@@ -106,11 +106,11 @@ class FirstSheetImport implements ToCollection
                 '3' => 'required|regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{4,8}$/',
                 '4' => 'required|email|unique:employees,email_address',
                 '5' => 'nullable|in:1,2',
-                '6' => 'required|date_format:Y-m-d',
+                '6' => 'required|numeric',
                 '7' => 'nullable|in:1,2,3',
-                '8' => 'nullable'
+                '8' => 'nullable',
             ];
-            $validator = Validator::make($row->toArray(), $rules, [], $this->attributeNames());
+            $validator = Validator::make($row->toArray(), $rules, ['6.numeric' => 'Invalid date format'], $this->attributeNames());
             if ($validator->fails()) {
                 $columnErrors = $validator->errors()->all();
                 foreach ($columnErrors as $columnError) {
