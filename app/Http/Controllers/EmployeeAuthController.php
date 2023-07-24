@@ -64,11 +64,9 @@ class EmployeeAuthController extends Controller
      */
     public function logout(Request $request)
     {
-        // Clear the employee's session
-        session()->forget('employee');
-        //end session for previousURL in detail page
-        session()->flush('previous-url-detail');
-        // Redirect to the login page
+        //end all session
+        session()->flush();
+        //redirect to the login page
         return redirect()->route('login.show');
     }
 }

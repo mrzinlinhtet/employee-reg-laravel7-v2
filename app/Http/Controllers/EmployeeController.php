@@ -218,8 +218,6 @@ class EmployeeController extends Controller
         //call UpdateEmployee from DBTransactions
         $updateEmployee = new UpdateEmployee($request, $id);
         $updateResult = $updateEmployee->executeProcess();
-        //end session for previousURL when update 
-        session()->forget('previous-url-edit' . $id);
         //check if a new photo is being uploaded
         if ($request->hasFile('photo')) {
             //call UpdateEmployeeUpload from DBTransactions
