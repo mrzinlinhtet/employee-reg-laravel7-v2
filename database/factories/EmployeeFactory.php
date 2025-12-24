@@ -1,22 +1,28 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Models\Employee;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
-$factory->define(Employee::class, function (Faker $faker) {
-    return [
-        'employee_id'=>rand(10001,19999),
-        'employee_code'=>$faker->firstName(),
-        'employee_name'=>$faker->name(),
-        'nrc_number'=>$faker->creditCardNumber(),
-        'password'=>Hash::make("asdf@123"),
-        'email_address'=>$faker->email(),
-        'gender'=>rand(1,2),
-        'date_of_birth'=>$faker->date($format = 'Y-m-d', $max = 'now'),
-        'marital_status'=>rand(1,3),
-        'address'=>$faker->address(),
-    ];
-});
+class EmployeeFactory extends Factory
+{
+    protected $model = Employee::class;
+
+    public function definition(): array
+    {
+        return [
+            'employee_id'    => $this->faker->unique()->numberBetween(10001, 19999),
+            'employee_code'  => $this->faker->bothify('EMP###'),
+            'employee_name'  => $this->faker->name(),
+            'nrc_number'     => $this->faker->numerify('##########'),
+            'password'       => Hash::make('asdf@123'),
+            'email_address'  => $this->faker->unique()->safeEmail(),
+            'gender'         => $this->faker->randomElement([1, 2]),
+            'date_of_birth'  => $this->faker->date('Y-m-d'),
+            'marital_status' => $this->faker->randomElement([1, 2, 3]),
+            'address'        => $this->faker->address(),
+        ];
+    }
+}
